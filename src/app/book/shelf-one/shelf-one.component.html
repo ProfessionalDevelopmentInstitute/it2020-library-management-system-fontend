@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <div class="container sm">
+      <div class="card card-body bg-transparent shadow text-center">
+        <div class="container" >
+          <div class="row">
+              <div class="card card-body shadow-lg bg-gray-light" *ngFor="let d of result">
+                <div class="col-lg-12">
+                  <a routerLink="/shelf/one" ><strong class="text-center text-indigo">{{d.type}}</strong></a>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+

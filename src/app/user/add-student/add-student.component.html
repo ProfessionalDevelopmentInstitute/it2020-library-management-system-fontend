@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Add Student</title>
+</head>
+<body>
+<div class="container mt-5">
+  <div class="card card-body shadow">
+    <div class="row">
+      <!--      <div class="col-sm-1"></div>-->
+      <div class="col-lg-3">
+<!--        <div class="card card-body">-->
+<!--          <strong class="text-center text-lg">Add New Category</strong>-->
+<!--          <form class="mt-3" [formGroup]="addForm" (ngSubmit)="onSubmit()">-->
+<!--            <div class="form-group">-->
+<!--              <label class="small"><i class="fa fa-list-alt text-indigo"></i> Category Type</label>-->
+<!--              <input type="text" class="form-control" formControlName="type">-->
+<!--              <div class="text-danger small" *ngIf="addForm.controls.type.invalid">Category Type is required</div>-->
+
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--              <label class="small"><i class="fa fa-pager text-indigo"></i> Description</label>-->
+<!--              <textarea class="form-control" formControlName="description"></textarea>-->
+<!--              <div class="text-danger small" *ngIf="addForm.controls.description.invalid">Description is required</div>-->
+
+<!--            </div>-->
+<!--            <div class="form-group ">-->
+<!--              <button [disabled]="addForm.invalid" type="submit" class="btn btn-outline-dark form-control"><strong>Add</strong></button>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+      </div>
+      <div class="col-lg-9">
+        <div class="card card-body">
+          <strong class="text-center  text-lg">Add New Student</strong>
+          <form class="mt-3">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="small" ><i class="fa fa-id-card text-indigo"></i> Library Card</label>
+                  <select class="custom-select">
+                    <option *ngFor="let r of result" value="{{r.id}}">{{r.rollNo}}</option>
+                  </select>
+<!--                  <div class="text-danger small" *ngIf="addBookForm.controls.categoryId.invalid">Category is required</div>-->
+                </div>
+                <div class="form-group">
+                  <label class="small"><i class="fa fa-user-cog text-indigo"></i>Student Name</label>
+                  <input type="text" class="form-control" >
+<!--                  <div class="text-danger small" *ngIf="addBookForm.controls.name.invalid">Book Title is required</div>-->
+
+                </div>
+                <div class="form-group">
+                  <label class="small"><i class="fa fa-envelope-open text-indigo"></i> Email</label>
+                  <input type="text" class="form-control" >
+<!--                  <div class="text-danger small" *ngIf="addBookForm.controls.author.invalid">Author Name is required</div>-->
+                </div>
+                <div class="form-group">
+                  <label class="small"><i class="fa fa-sort-numeric-up-alt text-indigo"></i> RollNo</label>
+                  <input type="text" class="form-control" >
+                  <!--                  <div class="text-danger small" *ngIf="addBookForm.controls.edition.invalid">Edition is required</div>-->
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="small"><i class="fa fa-address-card text-indigo"></i> Address</label>
+                  <input type="text" class="form-control" >
+
+                </div>
+                <div class="form-group">
+                  <label class="small"><i class="fa fa-calendar-times text-indigo"></i> Date of Birth</label>
+                  <input type="text" class="form-control" >
+<!--                  <div class="text-danger small" *ngIf="addBookForm.controls.imgUrl.invalid">URL is required</div>-->
+
+                </div>
+                <div class="form-group">
+                  <label class="small "><i class="fa fa-phone-alt text-indigo"></i> Phone</label>
+                  <input type="text" class="form-control" >
+<!--                  <div class="text-danger small" *ngIf="addBookForm.controls.name.invalid">Price is required</div>-->
+                </div>
+              </div>
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-outline-dark"><strong>Add Student</strong></button> &nbsp; &nbsp;
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

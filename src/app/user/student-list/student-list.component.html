@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div class="container-fluid mt-5">
+  <div class="card card-body">
+    <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Book</a>
+    <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
+      <table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">
+        <thead class="bg-warning text-indigo">
+        <tr>
+<!--          <th class="text-center">ID</th>-->
+          <th class="text-center">Name</th>
+          <th class="text-center">Email</th>
+          <th class="text-center">Address</th>
+          <th class="text-center">RollNo</th>
+          <th class="text-center">Phone</th>
+          <th class="text-center">Date of Birth</th>
+          <th class="text-center">Library Card Id</th>
+<!--          <th class="text-center">Library Card Id</th>-->
+          <th class="text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let r of result">
+        <tr >
+<!--          <td class="text-center">{{r.id}}</td>-->
+          <!--          <td>{{b.categoryId}}</td>-->
+          <td >{{r.name}}</td>
+          <td >{{r.email}}</td>
+          <td class="text-center">{{r.address}}</td>
+          <td class="text-center">{{r.rollNo}}</td>
+          <td class="text-center">{{r.phone}}</td>
+          <td class="text-center">{{r.dateOfBirth}}</td>
+          <td class="text-center"></td>
+<!--          <td *ngFor="let l of b"  class="text-center">{{l.id}}</td>-->
+          <!--          <td>{{b.imgUrl}}</td>-->
+          <td class="text-center">
+            <a class="btn btn-outline-success btn-sm" ><span><i class="fa fa-eye text-info"></i> </span></a> &nbsp; &nbsp;
+            <a class="btn btn-outline-primary btn-sm" ><span><i class="fa fa-edit text-success"></i></span></a> &nbsp; &nbsp;
+            <a class="btn btn-outline-secondary btn-sm" (click)="onDelete(close, r.id)"><i class="fa fa-trash text-danger"></i></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!--&lt;!&ndash;  detail model&ndash;&gt;-->
+<!--<ng-template #content let-modal>-->
+<!--  <div class="modal-header">-->
+<!--    <span class="text-warning"><h5 class="modal-title" id="modal-basic-title">Details Book Info</h5></span>-->
+<!--    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">-->
+<!--      <span aria-hidden="true">&times;</span>-->
+<!--    </button>-->
+<!--  </div>-->
+<!--  <div class="modal-body">-->
+<!--    <form>-->
+<!--      <div class="form-group">-->
+<!--        <label for="firstname">Firstname</label>-->
+<!--        <div class="input-group">-->
+<!--          <input id="firstname" class="form-control" >-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--  <div class="modal-footer">-->
+<!--    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>-->
+<!--  </div>-->
+<!--</ng-template>-->
+<!--&lt;!&ndash;  end modal&ndash;&gt;-->
+<!--  delete model-->
+<ng-template #close let-modal class="modal-sm fade">
+  <div class="modal-header">
+    <span class="text-center text-warning"><h5 class="modal-title" id="deleteModal">Delete Book</h5></span>
+  </div>
+  <div class="modal-body">
+    <strong class="text-danger"> Are You Sure Delete?</strong>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-success btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      close
+    </button>
+    <button type="submit" class="btn btn-outline-danger" (click)="DeleteStud()"><i class="fa fa-trash"></i></button>
+    <!--      (click)="modal.close('Save click')"-->
+  </div>
+</ng-template>
+<!--  end modal-->
+<!--&lt;!&ndash;  delete model&ndash;&gt;-->
+<!--<ng-template #update let-modal class="modal fade">-->
+<!--  <div class="modal-header">-->
+<!--    <span class="text-warning"><h5 class="modal-title text-center" id="updateModal">Update Book Info</h5></span>-->
+<!--  </div>-->
+<!--  <div class="modal-body">-->
+<!--    <form class="mt-3" [formGroup]="updateForm">-->
+<!--      <div class="form-group">-->
+<!--        <input placeholder="စာအုပ်အမည်" class="form-control" formControlName="name">-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <input type="text" placeholder="စာရေးဆရာအမည်" class="form-control" formControlName="author">-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <input type="text" placeholder="စာအုပ်အကြိမ်ရေ" class="form-control" formControlName="edition">-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <input type="text" placeholder="စျေးနှုန်း" class="form-control" formControlName="price">-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <input type="text" placeholder="ISBN" class="form-control" formControlName="isbn">-->
+<!--      </div>-->
+<!--      <hr>-->
+<!--      <div class="form-group float-right">-->
+<!--        <button type="button" class="btn btn-outline-danger btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">-->
+<!--          close-->
+<!--        </button> &nbsp;-->
+<!--        <button type="submit" class="btn btn-outline-success" (click)="UpdateBook()">Update</button>-->
+<!--        &lt;!&ndash;      (click)="modal.close('Save click')"&ndash;&gt;-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+
+<!--</ng-template>-->
+<!--&lt;!&ndash;  end modal&ndash;&gt;-->
+
+
+<!--<div>-->
+<!--  <img src="http://localhost:8081/libMgmtSystem/file/get/upload/BOOKURL/mph/87251605390474836/81FQvsm31NL.jpg" class="img-thumbnail">-->
+<!--</div>-->
+</body>
+<!--  <script src="node_modules/jquery/dist/jquery.min.js" defer></script>-->
+<!--<script src="node_modules/datatables.net/js/jquery.dataTables.min.js" defer></script>-->
+</html>

@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <h4 class="text-center text-warning">Book Category In UCST(Thaton) Library</h4>
+  <div class="container mt-3 sm">
+    <div class="card card-body bg-transparent shadow text-center">
+      <div class="container" >
+        <div class="row">
+          <div class="card card-body shadow-lg bg-gray-light" *ngFor="let d of shelf">
+            <div class="col-lg-12">
+              <a routerLink="/shelf/one" ><strong class="text-center text-indigo">Shelf No.{{d.id}}</strong></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
