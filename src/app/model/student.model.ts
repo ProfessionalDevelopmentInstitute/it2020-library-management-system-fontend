@@ -1,16 +1,15 @@
 import {LibraryCardModel} from './library-card.model';
-import {ResponseModel} from './response.model';
+import {CredentialModel} from './credential.model';
 
 export interface StudentModel {
   id?: number;
   name: string;
   phone: string;
   address: string;
-  email: string;
+  email: CredentialModel;
   dateOfBirth: Date;
-  rollNo: string;
-  password: string;
-  role: string;
-  libraryCardRollNo: string;
+  password?: string;
+  role?: string;
+  libraryCard: LibraryCardModel;
 }
 export const ROLE: string[] = ['USER'];

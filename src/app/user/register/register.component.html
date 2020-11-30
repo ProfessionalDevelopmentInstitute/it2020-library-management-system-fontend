@@ -12,19 +12,10 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" ><i class="fa fa-id-card"></i> </span>
               </div>
-              <input type="text" class="form-control" placeholder="LibraryCard's RollNo" formControlName="libraryCardRollNo">
+              <input type="text" class="form-control" placeholder="LibraryCard's RollNo" formControlName="libraryCard">
             </div>
-            <div class="text-danger small" *ngIf="registerForm.controls.libraryCardRollNo.invalid">LibraryCard's RollNo is required</div>
+            <div class="text-danger small" *ngIf="registerForm.controls.libraryCard.invalid">LibraryCard's RollNo is required</div>
           </div>
-<!--          <div class="form-group">-->
-<!--            <label class="small"><i class="fa fa-bars text-indigo"></i> LibraryCard's RollNo</label>-->
-<!--            <select class="custom-select" formControlName="libraryCard">-->
-<!--              <option *ngFor="let s of result" value="{{s.rollNo}}">{{s.rollNo}}</option>-->
-<!--              &lt;!&ndash;let x = index" [value]="x"&ndash;&gt;-->
-<!--            </select>-->
-<!--            <div class="text-danger small" *ngIf="registerForm.controls.libraryCard.invalid">LibraryCard's RollNo is required</div>-->
-
-<!--          </div>-->
           <div class="form-group">
             <div class="input-group flex-nowrap">
               <div class="input-group-prepend">
@@ -42,15 +33,6 @@
               <input type="email" class="form-control" placeholder="Email Address" formControlName="email">
             </div>
             <div class="text-danger small" *ngIf="registerForm.controls.email.invalid">Email is required</div>
-          </div>
-          <div class="form-group">
-            <div class="input-group flex-nowrap">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-sort-numeric-up"></i> </span>
-              </div>
-              <input type="email" class="form-control" placeholder="RollNo" formControlName="rollNo">
-            </div>
-            <div class="text-danger small" *ngIf="registerForm.controls.rollNo.invalid">RollNo is required</div>
           </div>
 
           <div class="form-group">

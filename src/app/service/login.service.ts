@@ -4,6 +4,7 @@ import {StudentModel} from '../model/student.model';
 import {Observable, Subject} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {LoginModel} from '../model/login.model';
+import {LibrarianModel} from '../model/librarian.model';
 
 @Injectable({
   providedIn: 'root'

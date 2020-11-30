@@ -4,6 +4,8 @@ import {Observable, Subject} from 'rxjs';
 import {LoginModel} from '../model/login.model';
 import {tap} from 'rxjs/operators';
 import {LoginService} from './login.service';
+import {LibrarianModel} from '../model/librarian.model';
+import {AuthModel} from '../model/auth.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,9 @@ export class LoginManagerService {
 
   isAuth: Subject<boolean> = new Subject<boolean>();
 
+
   studentModel: StudentModel;
+  librarianModel: LibrarianModel;
   credential: string;
 
   constructor(private loginService: LoginService) {}
@@ -23,16 +27,17 @@ export class LoginManagerService {
         // this.studentModel = value;
         this.credential = this.loginService.encrypt(login);
         localStorage.setItem('student', JSON.stringify(value));
+        localStorage.setItem('librarian', JSON.stringify(value));
         localStorage.setItem('credential', this.credential);
         this.isAuth.next(true);
       })
     );
   }
 
-
   public sessionSignIn(): boolean {
-    if (localStorage.hasOwnProperty('student') && localStorage.hasOwnProperty('credential')) {
+    if (localStorage.hasOwnProperty('student') && localStorage.hasOwnProperty('librarian') && localStorage.hasOwnProperty('credential')) {
       this.studentModel = JSON.parse(localStorage.getItem('student'));
+      this.librarianModel = JSON.parse(localStorage.getItem('librarian'));
       this.credential = localStorage.getItem('credential');
       this.isAuth.next(true);
       return true;
@@ -44,6 +49,7 @@ export class LoginManagerService {
     this.isAuth.next(false);
     this.credential = null;
     this.studentModel = null;
+    this.librarianModel = null;
     localStorage.clear();
   }
 }

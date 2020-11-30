@@ -38,30 +38,47 @@
         </div>
       </div>
     </form>
+<!--    <a class="navbar-nav ml-auto mr-5 shadow sm small" *ngIf="!isAuthenticated">-->
+<!--      <ul>-->
+<!--        &lt;!&ndash; Messages Dropdown Menu &ndash;&gt;-->
+<!--        <li class="nav-item dropdown">-->
+<!--          <a class="nav-link" data-toggle="dropdown" >-->
+<!--            <strong class="text-white ">Register</strong>-->
+<!--          </a>-->
+<!--          <div class="dropdown-menu dropdown-menu dropdown-menu-right">-->
+<!--            <a *ngIf="!isAuthenticated" routerLink="/register" routerLinkActive="" class="dropdown-item">-->
+<!--              <i class="fa fa-user-circle"> &nbsp; &nbsp;<strong>Register</strong></i>-->
+<!--            </a>-->
+<!--            <div class="dropdown-divider"></div>-->
+<!--            <a *ngIf="!isAuthenticated" routerLink="/librarian/register" class="d-block dropdown-item">-->
+<!--              <i class="fa fa-user-plus">&nbsp; &nbsp;<strong>Librarian Register</strong></i>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </a>-->
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto mr-5 shadow sm small">
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fa fa-user-cog fa-2x text-warning"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <i class="fa fa-user-circle"> &nbsp; &nbsp;<strong>Profile</strong></i>
+      <ul class="navbar-nav ml-auto mr-5 shadow sm small">
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <a class="nav-link text-center" data-toggle="dropdown" >
+            <i class="fa fa-user-cog fa-2x text-warning"></i>
           </a>
-          <a href="#" class="dropdown-item">
-            <i class="fa fa-cogs">&nbsp; &nbsp;<strong>Setting</strong></i>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fa fa-sign-out-alt">&nbsp; &nbsp;<strong>Log Out</strong></i>
-          </a>
-        </div>
-      </li>
-
-
-    </ul>
+          <div class="dropdown-menu dropdown-menu dropdown-menu-right">
+            <a href="#" class="dropdown-item">
+              <i class="fa fa-user-circle"> &nbsp; &nbsp;<strong>Profile</strong></i>
+            </a>
+            <a href="#" class="d-block dropdown-item">
+              <i class="fa fa-cogs">&nbsp; &nbsp;<strong>Setting</strong></i>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a (click)="logout()" *ngIf="isAuthenticated" class="d-block dropdown-item">
+              <i class="fa fa-sign-out-alt">&nbsp; &nbsp;<strong>Log Out</strong></i>
+            </a>
+          </div>
+        </li>
+      </ul>
   </nav>
   <!-- /.navbar -->
 

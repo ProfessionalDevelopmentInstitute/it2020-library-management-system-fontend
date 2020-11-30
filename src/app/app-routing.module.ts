@@ -14,19 +14,19 @@ import {AddStudentComponent} from './user/add-student/add-student.component';
 import {LibrarianRegisterComponent} from './user/register/librarian-register/librarian-register.component';
 
 const routes: Routes = [
-  { path: '',   redirectTo: 'dashboard', pathMatch: 'full' },
-  {path: 'dashboard', component: NavbarComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'librarian/register', component: LibrarianRegisterComponent},
-  {path: 'about', component: AboutComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'book/category', component: CategoryComponent},
-  {path: 'book/list', component: ListsComponent},
-  {path: 'shelf/one', component: ShelfOneComponent},
-  {path: 'shelves', component: ShelvesComponent},
-  {path: 'add/new/items', component: AddItemComponent},
-  {path: 'student/list', component: StudentListComponent},
-  {path: 'add/new/student', component: AddStudentComponent},
+  // { path: '',   redirectTo: 'dashboard', pathMatch: 'full' },
+  // {path: 'dashboard', component: NavbarComponent},
+  // {path: 'register', component: RegisterComponent},
+  // {path: 'librarian/register', component: LibrarianRegisterComponent},
+  // {path: 'about', component: AboutComponent},
+  // {path: 'login', component: LoginComponent},
+  // {path: 'book/category', component: CategoryComponent},
+  // {path: 'book/list', component: ListsComponent},
+  // {path: 'shelf/one', component: ShelfOneComponent},
+  // {path: 'shelves', component: ShelvesComponent},
+  // {path: 'add/new/items', component: AddItemComponent},
+  // {path: 'student/list', component: StudentListComponent},
+  // {path: 'add/new/student', component: AddStudentComponent},
 
 ];
 

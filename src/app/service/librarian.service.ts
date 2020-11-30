@@ -10,7 +10,7 @@ import {HttpClient} from '@angular/common/http';
 export class LibrarianService {
 
   constructor(private httpClient: HttpClient) { }
-  createLibrarian(addL: LibrarianModel): Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>('http://localhost:8081/libMgmtSystem/create/Librarian/', addL);
+  createLibrarian(addLibrarian: LibrarianModel): Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>('http://localhost:8081/libMgmtSystem/create/Librarian/', addLibrarian);
   }
 }

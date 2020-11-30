@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,40 +12,40 @@
 <body>
 <div class="container-fluid mt-5">
   <div class="card card-body">
-    <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Book</a>
+    <div>
+      <form [formGroup]="inputForm" #searchInfo (ngSubmit)="clicker(searchInfo)">
+        <input type="text" class="small sm" placeholder="Search By Name" formControlName="name">&nbsp;
+        <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
     <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
       <table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">
         <thead class="bg-warning text-indigo">
         <tr>
-<!--          <th class="text-center">ID</th>-->
+          <th class="text-center">ID</th>
           <th class="text-center">Name</th>
-          <th class="text-center">Email</th>
+<!--          <th class="text-center">Email</th>-->
           <th class="text-center">Address</th>
-          <th class="text-center">RollNo</th>
           <th class="text-center">Phone</th>
           <th class="text-center">Date of Birth</th>
-          <th class="text-center">Library Card Id</th>
-<!--          <th class="text-center">Library Card Id</th>-->
+          <th class="text-center">RollNo</th>
           <th class="text-center">Actions</th>
         </tr>
         </thead>
-        <tbody *ngFor="let r of result">
-        <tr >
-<!--          <td class="text-center">{{r.id}}</td>-->
-          <!--          <td>{{b.categoryId}}</td>-->
-          <td >{{r.name}}</td>
-          <td >{{r.email}}</td>
-          <td class="text-center">{{r.address}}</td>
-          <td class="text-center">{{r.rollNo}}</td>
-          <td class="text-center">{{r.phone}}</td>
-          <td class="text-center">{{r.dateOfBirth}}</td>
-          <td class="text-center"></td>
-<!--          <td *ngFor="let l of b"  class="text-center">{{l.id}}</td>-->
-          <!--          <td>{{b.imgUrl}}</td>-->
+        <tbody >
+        <tr *ngFor="let s of student">
+          <td class="text-center">{{s.id}}</td>
+<!--          <td ></td>-->
+<!--          <td></td>-->
+          <td class="text-center">{{s.name}}</td>
+          <td class="text-center">{{s.address}}</td>
+          <td class="text-center">{{s.phone}}</td>
+          <td class="text-center">{{s.dateOfBirth}}</td>
+          <td class="text-center">{{s.libraryCard.rollNo}}</td>
           <td class="text-center">
-            <a class="btn btn-outline-success btn-sm" ><span><i class="fa fa-eye text-info"></i> </span></a> &nbsp; &nbsp;
-            <a class="btn btn-outline-primary btn-sm" ><span><i class="fa fa-edit text-success"></i></span></a> &nbsp; &nbsp;
-            <a class="btn btn-outline-secondary btn-sm" (click)="onDelete(close, r.id)"><i class="fa fa-trash text-danger"></i></a>
+            <a class="btn btn-outline-success btn-sm" (click)="open(content, s)"><span><i class="fa fa-eye text-info"></i> </span></a> &nbsp; &nbsp;
+            <a class="btn btn-outline-primary btn-sm" (click)="onUpdate(update, s)"><span><i class="fa fa-edit text-success"></i></span></a> &nbsp; &nbsp;
+            <a class="btn btn-outline-secondary btn-sm" (click)="onDelete(close, s.id)"><i class="fa fa-trash text-danger"></i></a>
           </td>
         </tr>
         </tbody>
@@ -52,29 +54,33 @@
   </div>
 </div>
 
-<!--&lt;!&ndash;  detail model&ndash;&gt;-->
-<!--<ng-template #content let-modal>-->
-<!--  <div class="modal-header">-->
-<!--    <span class="text-warning"><h5 class="modal-title" id="modal-basic-title">Details Book Info</h5></span>-->
-<!--    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">-->
-<!--      <span aria-hidden="true">&times;</span>-->
-<!--    </button>-->
-<!--  </div>-->
-<!--  <div class="modal-body">-->
-<!--    <form>-->
-<!--      <div class="form-group">-->
-<!--        <label for="firstname">Firstname</label>-->
-<!--        <div class="input-group">-->
-<!--          <input id="firstname" class="form-control" >-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--  <div class="modal-footer">-->
-<!--    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>-->
-<!--  </div>-->
-<!--</ng-template>-->
-<!--&lt;!&ndash;  end modal&ndash;&gt;-->
+<!--  detail model-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <span class="text-indigo"><h5 class="modal-title" id="modal-basic-title">Profile Setting</h5></span>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="text-center form-group">
+      <i class="fa fa-id-card text-indigo"></i> &nbsp; &nbsp; <strong>{{rollNo}}</strong>
+    </div>
+    <div class="text-center form-group">
+      <i class="fa fa-user-cog text-indigo"></i> &nbsp; &nbsp; <strong>{{name}}</strong>
+    </div>
+    <div class="text-center form-group">
+      <i class="fa fa-calendar-check text-indigo"></i> &nbsp; &nbsp; <strong>{{dateOfBirth}}</strong>
+    </div>
+    <div class="text-center form-group">
+      <i class="fa fa-phone-alt text-indigo"></i> &nbsp; &nbsp; <strong>{{phone}}</strong>
+    </div>
+    <div class="text-center form-group">
+      <i class="fa fa-home text-indigo"></i> &nbsp; &nbsp; <strong>{{address}}</strong>
+    </div>
+  </div>
+</ng-template>
+<!--  end modal-->
 <!--  delete model-->
 <ng-template #close let-modal class="modal-sm fade">
   <div class="modal-header">
@@ -92,47 +98,117 @@
   </div>
 </ng-template>
 <!--  end modal-->
-<!--&lt;!&ndash;  delete model&ndash;&gt;-->
-<!--<ng-template #update let-modal class="modal fade">-->
-<!--  <div class="modal-header">-->
-<!--    <span class="text-warning"><h5 class="modal-title text-center" id="updateModal">Update Book Info</h5></span>-->
-<!--  </div>-->
-<!--  <div class="modal-body">-->
-<!--    <form class="mt-3" [formGroup]="updateForm">-->
-<!--      <div class="form-group">-->
-<!--        <input placeholder="စာအုပ်အမည်" class="form-control" formControlName="name">-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <input type="text" placeholder="စာရေးဆရာအမည်" class="form-control" formControlName="author">-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <input type="text" placeholder="စာအုပ်အကြိမ်ရေ" class="form-control" formControlName="edition">-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <input type="text" placeholder="စျေးနှုန်း" class="form-control" formControlName="price">-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <input type="text" placeholder="ISBN" class="form-control" formControlName="isbn">-->
-<!--      </div>-->
-<!--      <hr>-->
-<!--      <div class="form-group float-right">-->
-<!--        <button type="button" class="btn btn-outline-danger btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">-->
-<!--          close-->
-<!--        </button> &nbsp;-->
-<!--        <button type="submit" class="btn btn-outline-success" (click)="UpdateBook()">Update</button>-->
-<!--        &lt;!&ndash;      (click)="modal.close('Save click')"&ndash;&gt;-->
-<!--      </div>-->
-<!--    </form>-->
-<!--  </div>-->
+<!--  delete model-->
+<ng-template #update let-modal class="modal fade">
+  <div class="modal-header">
+    <span class="text-warning"><h5 class="modal-title text-center" id="updateModal">Update Book Info</h5></span>
+  </div>
+  <div class="modal-body">
+    <form class="mt-3" [formGroup]="updateStudForm">
+      <div class="form-group">
+        <div class="input-group flex-nowrap">
+          <div class="input-group-prepend">
+            <span class="input-group-text" ><i class="fa fa-id-card"></i> </span>
+          </div>
+          <input type="text" class="form-control" placeholder="LibraryCard's RollNo" formControlName="libraryCard">
+        </div>
+        <div class="text-danger small" *ngIf="updateStudForm.controls.libraryCard.invalid">LibraryCard's RollNo is required</div>
+      </div>
+      <div class="form-group">
+        <div class="input-group flex-nowrap">
+          <div class="input-group-prepend">
+            <span class="input-group-text" ><i class="fa fa-user"></i> </span>
+          </div>
+          <input type="text" class="form-control" placeholder="Username" formControlName="name">
+        </div>
+        <div class="text-danger small" *ngIf="updateStudForm.controls.name.invalid">Name is required</div>
+      </div>
+      <div class="form-group">
+        <div class="input-group flex-nowrap">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-envelope-open"></i> </span>
+          </div>
+          <input type="email" class="form-control" placeholder="Email Address" formControlName="email">
+        </div>
+        <div class="text-danger small" *ngIf="updateStudForm.controls.email.invalid">Email is required</div>
+      </div>
+      <div class="form-group">
+        <div class="input-group flex-nowrap">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-address-card"></i> </span>
+          </div>
+          <!--              <input type="text" class="form-control" placeholder="Address" formControlName="address">-->
+          <textarea class="form-control" formControlName="address"></textarea>
+        </div>
+        <div class="text-danger small" *ngIf="updateStudForm.controls.address.invalid">Address is required</div>
+      </div>
+      <div class="form-group">
+        <div class="input-group flex-nowrap">
+          <div class="input-group-prepend">
+            <span class="input-group-text" ><i class="fa fa-phone"></i> </span>
+          </div>
+          <input type="tel" class="form-control" placeholder="Phone Number" formControlName="phone">
+        </div>
+        <div class="text-danger small" *ngIf="updateStudForm.controls.phone.invalid">Phone is required</div>
+      </div>
+      <div class="form-group">
+        <div class="input-group flex-nowrap">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-calendar"></i> </span>
+          </div>
+          <input type="text" [matDatepicker]="picker" class="form-control" placeholder="Date of Birth" formControlName="dateOfBirth">
+          <div class="input-group-prepend">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </div>
+        </div>
+        <div class="text-danger small" *ngIf="updateStudForm.controls.dateOfBirth.invalid">Date of Birth is required</div>
+      </div>
+      <div class="form-group">
+        <div class="input-group flex-nowrap">
+          <div class="input-group-prepend">
+            <span class="input-group-text" ><i class="fa fa-user"></i> </span>
+          </div>
+          <select class="custom-select" formControlName="role">
+            <option value="{{roles}}">{{roles}}</option>
+          </select>
+        </div>
+        <div class="text-danger small" *ngIf="updateStudForm.controls.role.invalid">User Role is required</div>
+      </div>
+      <div formGroupName="passwords">
+        <div class="form-group">
+          <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+              <span class="input-group-text" ><i class="fa fa-lock"></i> </span>
+            </div>
+            <input type="password" class="form-control" placeholder="******" formControlName="password">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-lock"></i> </span>
+            </div>
+            <input type="password" class="form-control" placeholder="******" formControlName="confirmPassword">
+          </div>
+        </div>
+        <div class="text-danger" *ngIf="updateStudForm.touched && updateStudForm.controls.passwords.errors !== null && updateStudForm.controls.passwords.errors.PasswordNotMergeError">
+          * password and confirm password must be same.
+        </div>
+      </div>
+      <hr>
+      <div class="form-group float-right">
+        <button type="button" class="btn btn-outline-danger btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          close
+        </button> &nbsp;
+        <button type="submit" class="btn btn-outline-success" (click)="UpdateStudent()">Update</button>
+        <!--      (click)="modal.close('Save click')"-->
+      </div>
+    </form>
+  </div>
 
-<!--</ng-template>-->
-<!--&lt;!&ndash;  end modal&ndash;&gt;-->
+</ng-template>
+<!--  end modal-->
 
-
-<!--<div>-->
-<!--  <img src="http://localhost:8081/libMgmtSystem/file/get/upload/BOOKURL/mph/87251605390474836/81FQvsm31NL.jpg" class="img-thumbnail">-->
-<!--</div>-->
 </body>
-<!--  <script src="node_modules/jquery/dist/jquery.min.js" defer></script>-->
-<!--<script src="node_modules/datatables.net/js/jquery.dataTables.min.js" defer></script>-->
 </html>

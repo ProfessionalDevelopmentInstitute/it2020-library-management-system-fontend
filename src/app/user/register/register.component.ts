@@ -20,10 +20,9 @@ export class RegisterComponent implements OnInit {
   constructor(private libraryService: LibraryCardService,
               private validatorService: ValidatorService, private studentService: StudentService, private router: Router) {
     this.registerForm = new FormGroup({
-      libraryCardRollNo: new FormControl('', Validators.required),
+      libraryCard: new FormControl('', Validators.required),
       name: new FormControl('', [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      rollNo: new FormControl('', Validators.required),
       phone: new FormControl('', Validators.required),
       address: new FormControl('', [Validators.required]),
       dOfBirth: new FormControl('', Validators.required),
@@ -36,12 +35,12 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.libraryService.getLibraryCard().subscribe(
-      value => {
-        this.result = value.result;
-        console.log(value.message)
-      }
-    );
+    // this.libraryService.getLibraryCard().subscribe(
+    //   value => {
+    //     this.result = value.result;
+    //     console.log(value.message)
+    //   }
+    // );
   }
 
   onClick(): void {
@@ -49,12 +48,11 @@ export class RegisterComponent implements OnInit {
       name: this.registerForm.value.name,
       email: this.registerForm.value.email,
       phone: this.registerForm.value.phone,
-      rollNo: this.registerForm.value.rollNo,
       address: this.registerForm.value.address,
       dateOfBirth: this.registerForm.value.dOfBirth,
       password: this.registerForm.value.passwords.password,
       role: this.registerForm.value.role,
-      libraryCardRollNo: this.registerForm.value.libraryCardRollNo
+      libraryCard: this.registerForm.value.libraryCard
     };
     console.log(register);
     this.studentService.createStudent(register).subscribe(

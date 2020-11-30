@@ -37,7 +37,7 @@ export class LibrarianRegisterComponent implements OnInit {
   ngOnInit(): void {
   }
   onClick(): void {
-    const register: LibrarianModel = {
+    const lRegister: LibrarianModel = {
       name: this.registerForm.value.name,
       email: this.registerForm.value.email,
       phone: this.registerForm.value.phone,
@@ -46,8 +46,8 @@ export class LibrarianRegisterComponent implements OnInit {
       password: this.registerForm.value.passwords.password,
       role: this.registerForm.value.role,
     };
-    console.log(register);
-    this.librarianService.createLibrarian(register).subscribe(
+    console.log(lRegister);
+    this.librarianService.createLibrarian(lRegister).subscribe(
       value => {
         console.log(value);
       },
