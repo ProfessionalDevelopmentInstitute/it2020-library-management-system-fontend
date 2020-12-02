@@ -16,16 +16,12 @@ import {ResponseModel} from '../../model/response.model';
 })
 export class AddItemComponent implements OnInit {
 
-  addForm: FormGroup;
   addBookForm: FormGroup;
   result: BookCategory[];
   shelf: Shelf[];
   constructor(private cateService: CategoryService, private router: Router,
               private shelfService: ShelfService, private listService: ListService) {
-    this.addForm = new FormGroup({
-      type: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required)
-    });
+
     this.addBookForm = new FormGroup({
       name: new FormControl('', Validators.required),
       author: new FormControl('', Validators.required),
@@ -53,20 +49,6 @@ export class AddItemComponent implements OnInit {
     );
   }
 
-  onSubmit(): void{
-    const add: BookCategory = {
-      id: this.addForm.value.id,
-      type: this.addForm.value.type,
-      description: this.addForm.value.description
-    };
-    console.log(add);
-    this.cateService.createBookCategory(add).subscribe(
-      value => {
-        console.log(value);
-      }
-    );
-    this.router.navigate(['/book/category'])
-  }
   onSubmitt(): void{
     const addBook: BookModel = {
       name: this.addBookForm.value.name,

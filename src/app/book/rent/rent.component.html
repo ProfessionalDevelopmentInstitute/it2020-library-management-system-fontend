@@ -8,9 +8,9 @@
   <title>Document</title>
 </head>
 <body>
-<div class="container-fluid mt-5">
+<div class="container-fluid mt-3">
   <div class="card card-body">
-<!--    <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Book</a>-->
+    <a class="text-warning" routerLink="/add/new/rent"><i class="fa fa-plus-circle"></i> Add New Rent</a>
     <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
       <table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">
         <thead class="bg-warning text-indigo">
@@ -41,8 +41,8 @@
           <!--          <td>{{b.imgUrl}}</td>-->
           <td  class="text-center">
             <a class="btn btn-outline-success btn-sm" ><span><i class="fa fa-eye text-info"></i> </span></a> &nbsp; &nbsp;
-            <a class="btn btn-outline-primary btn-sm" ><span><i class="fa fa-edit text-success"></i></span></a> &nbsp; &nbsp;
-            <a class="btn btn-outline-secondary btn-sm" ><i class="fa fa-trash text-danger"></i></a>
+            <a class="btn btn-outline-primary btn-sm" (click)="onUpdate(update, r)"><span><i class="fa fa-edit text-success"></i></span></a> &nbsp; &nbsp;
+            <a class="btn btn-outline-secondary btn-sm" (click)="onDelete(close, r.id)"><i class="fa fa-trash text-danger"></i></a>
           </td>
         </tr>
         </tbody>
@@ -74,81 +74,133 @@
 <!--  </div>-->
 <!--</ng-template>-->
 <!--&lt;!&ndash;  end modal&ndash;&gt;-->
-<!--&lt;!&ndash;  delete model&ndash;&gt;-->
-<!--<ng-template #close let-modal class="modal-sm fade">-->
-<!--  <div class="modal-header">-->
-<!--    <span class="text-center text-warning"><h5 class="modal-title" id="deleteModal">Delete Book</h5></span>-->
-<!--  </div>-->
-<!--  <div class="modal-body">-->
-<!--    <strong class="text-danger"> Are You Sure Delete?</strong>-->
-<!--  </div>-->
-<!--  <div class="modal-footer">-->
-<!--    <button type="button" class="btn btn-outline-success btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">-->
-<!--      close-->
-<!--    </button>-->
-<!--    <button type="submit" class="btn btn-outline-danger" (click)="DeleteBook()"><i class="fa fa-trash"></i></button>-->
-<!--    &lt;!&ndash;      (click)="modal.close('Save click')"&ndash;&gt;-->
-<!--  </div>-->
-<!--</ng-template>-->
-<!--&lt;!&ndash;  end modal&ndash;&gt;-->
-<!--&lt;!&ndash;  delete model&ndash;&gt;-->
-<!--<ng-template #update let-modal class="modal fade">-->
-<!--  <div class="modal-header">-->
-<!--    <span class="text-warning"><h5 class="modal-title text-center" id="updateModal">Update Book Info</h5></span>-->
-<!--  </div>-->
-<!--  <div class="modal-body">-->
-<!--    <form class="mt-3" [formGroup]="updateForm">-->
-<!--      <div class="form-group">-->
-<!--        <input placeholder="စာအုပ်အမည်" class="form-control" formControlName="name">-->
-<!--        <div class="text-danger small" *ngIf="updateForm.controls.name.invalid">Name is required</div>-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <input type="text" placeholder="စာရေးဆရာအမည်" class="form-control" formControlName="author">-->
-<!--        <div class="text-danger small" *ngIf="updateForm.controls.author.invalid">Author is required</div>-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <input type="text" placeholder="စာအုပ်အကြိမ်ရေ" class="form-control" formControlName="edition">-->
-<!--        <div class="text-danger small" *ngIf="updateForm.controls.edition.invalid">Edition is required</div>-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <input type="text" placeholder="စျေးနှုန်း" class="form-control" formControlName="price">-->
-<!--        <div class="text-danger small" *ngIf="updateForm.controls.price.invalid">Price is required</div>-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <input type="text" placeholder="ISBN" class="form-control" formControlName="isbn">-->
-<!--        <div class="text-danger small" *ngIf="updateForm.controls.isbn.invalid">ISBN is required</div>-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <input type="text" placeholder="ImgUrl" class="form-control" formControlName="imgUrl">-->
-<!--        <div class="text-danger small" *ngIf="updateForm.controls.imgUrl.invalid">IMGURL is required</div>-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <label class="small" ><i class="fa fa-list-alt text-indigo"></i> Category</label>-->
-<!--        <select class="custom-select" formControlName="categories" >-->
-<!--          <option *ngFor="let c of result; let x = index" [value]="x" >{{c.type}}</option>-->
-<!--        </select>-->
-<!--        <div class="text-danger small" *ngIf="updateForm.controls.categories.invalid">Category is required</div>-->
+<!--  delete model-->
+<ng-template #close let-modal class="modal-sm fade">
+  <div class="modal-header">
+    <span class="text-center text-warning"><h5 class="modal-title" id="deleteModal">Delete Book</h5></span>
+  </div>
+  <div class="modal-body">
+    <strong class="text-danger"> Are You Sure Delete?</strong>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-success btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      close
+    </button>
+    <button type="submit" class="btn btn-outline-danger" (click)="DeleteRent()"><i class="fa fa-trash"></i></button>
+    <!--      (click)="modal.close('Save click')"-->
+  </div>
+</ng-template>
+<!--  end modal-->
+<!--  update model-->
+<ng-template #update let-modal class="modal fade">
+  <div class="modal-header">
+    <span class="text-warning"><h5 class="modal-title text-center" id="updateModal">Update Book Info</h5></span>
+  </div>
+  <div class="modal-body">
+    <form class="" [formGroup]="addRForm" >
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group mt-4">
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text text-indigo"><i class="fa fa-book"></i> </span>
+              </div>
+              <input type="text" class="form-control" formControlName="book" placeholder="Book Name">
+            </div>
+            <div class="text-danger small" *ngIf="addRForm.controls.book.invalid">Book Name is required</div>
+          </div>
+          <div class="form-group mt-5">
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text text-indigo"><i class="fa fa-user"></i> </span>
+              </div>
+              <input type="text" class="form-control" formControlName="student" placeholder="Student Name">
+            </div>
+            <div class="text-danger small" *ngIf="addRForm.controls.student.invalid">Student Name is required</div>
+          </div>
+          <div class="form-group mt-5">
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text text-indigo"><i class="fa fa-user-cog"></i> </span>
+              </div>
+              <input type="text" class="form-control" formControlName="librarian" placeholder="Librarian Name">
+            </div>
+            <div class="text-danger small" *ngIf="addRForm.controls.librarian.invalid">Librarian Name is required</div>
+          </div>
+          <div class="form-group mt-5">
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text text-indigo"><i class="fa fa-calendar"></i> </span>
+              </div>
+              <input type="text" class="form-control" [matDatepicker]="picker1" formControlName="rentFromDate" placeholder="Rent Date">
+              <div class="input-group-prepend">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </div>
+            </div>
+            <div class="text-danger small" *ngIf="addRForm.controls.rentFromDate.invalid">Rent Date is required</div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group mt-4">
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text text-indigo"><i class="fa fa-calendar"></i> </span>
+              </div>
+              <input type="text" [matDatepicker]="picker2" class="form-control" placeholder="Due Date" formControlName="rentToDate">
+              <div class="input-group-prepend">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </div>
+            </div>
+            <div class="text-danger small" *ngIf="addRForm.controls.rentToDate.invalid">Due Date is required</div>
+          </div>
+          <div class="form-group mt-5">
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text text-indigo"><i class="fa fa-calendar"></i> </span>
+              </div>
+              <input type="text" [matDatepicker]="picker" class="form-control" placeholder="Return Date" formControlName="returnDate">
+              <div class="input-group-prepend">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </div>
+            </div>
+            <div class="text-danger small" *ngIf="addRForm.controls.returnDate.invalid">Return Date is required</div>
+          </div>
+          <div class="form-group mt-5">
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text text-indigo"><i class="fa fa-money-bill-alt"></i> </span>
+              </div>
+              <input type="text" class="form-control" formControlName="fine" placeholder="Fine">
+            </div>
+            <div class="text-danger small" *ngIf="addRForm.controls.fine.invalid">Fine is required</div>
+          </div>
+          <div class="form-group mt-5">
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text text-indigo"><i class="fa fa-user-edit"></i> </span>
+              </div>
+              <select class="custom-select" formControlName="status">
+                <option *ngFor="let s of Status" value="{{s}}">{{s}}</option>
+              </select>
+            </div>
+            <div class="text-danger small" *ngIf="addRForm.controls.status.invalid">Status is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group text-center">
+        <button type="button" class="btn btn-outline-danger btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          close
+        </button> &nbsp;
+        <button [disabled]="addRForm.invalid" type="submit" class="btn btn-outline-success" (click)="UpdateRent()">Update</button>
+        <!--      (click)="modal.close('Save click')"-->
+      </div>
+    </form>
+  </div>
 
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <label class="small"><i class="fa fa-bars text-indigo"></i> Shelf No</label>-->
-<!--        <select class="custom-select" formControlName="shelves" >-->
-<!--          <option *ngFor="let s of shelf; let x = index" [value]="x">{{s.id}}</option>-->
-<!--        </select>-->
-<!--        <div class="text-danger small" *ngIf="updateForm.controls.shelves.invalid">Shelf is required</div>-->
-<!--      </div>-->
-<!--      <hr>-->
-<!--      <div class="form-group float-right">-->
-<!--        <button type="button" class="btn btn-outline-danger btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">-->
-<!--          close-->
-<!--        </button> &nbsp;-->
-<!--        <button type="submit" class="btn btn-outline-success" (click)="UpdateBook()">Update</button>-->
-<!--        &lt;!&ndash;      (click)="modal.close('Save click')"&ndash;&gt;-->
-<!--      </div>-->
-<!--    </form>-->
-<!--  </div>-->
-
-<!--</ng-template>-->
+</ng-template>
 
 
 

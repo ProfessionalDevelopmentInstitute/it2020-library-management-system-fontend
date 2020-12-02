@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Home</title>
+</head>
+<body>
+<div class="container-fluid mt-3">
+  <h4 class="text-center text-indigo mt-3"><strong>Welcome To UCST(Thaton) Library</strong></h4>
+<!--  <div class="container-fluid mt-3 sm">-->
+    <div class="card card-body bg-transparent shadow mt-3">
+      <div class="container mt-3" >
+        <div class="row">
+          <div class="card card-body small shadow-lg bg-gray-light" *ngFor="let b of bookList">
+            <div class="col-lg-12">
+              <div class="text-center form-group">
+                <img src="http://localhost:8081/libMgmtSystem/file/get/{{b.imgUrl}}" class="img-thumbnail">
+              </div>
+              <div class="text-center">
+                <h6 class="small">Book Name:</h6> <strong class="text-center text-indigo">{{b.name}}</strong><br>
+<!--                <h6 class="small">Author:</h6><strong class="text-center text-indigo">{{b.edition}}</strong><br>-->
+                <h6 class="small">Author:</h6><strong class="text-center text-indigo">{{b.author}}</strong><br>
+                <h6 class="small">Shelf No:</h6><strong class="text-center text-indigo">{{b.shelves.id}}</strong><br>
+                <h6 class="small">Category:</h6><strong class="text-center text-indigo">{{b.categories.type}}</strong>
+              </div>
+              <a routerLink="/dashboard/add/new/rent" class="btn btn-outline-warning form-control mt-3"><strong>Borrow</strong></a>
+            </div>
+          </div>
+        </div>
+      </div>
+<!--    </div>-->
+  </div>
+</div>
+</body>
+</html>

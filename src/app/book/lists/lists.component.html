@@ -12,11 +12,11 @@
   <div class="card card-body">
     <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Book</a>
     <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
-      <table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">
+      <table  class="display table table-striped table-bordered table-hover" style="width:100%">
         <thead class="bg-warning text-indigo">
         <tr>
-          <th class="text-center">ID</th>
-<!--          <th>categoryId</th>-->
+          <th class="text-center">ShelfId</th>
+          <th class="text-center">CategoryId</th>
           <th class="text-center">စာအုပ်အမည်</th>
           <th class="text-center">စာရေးဆရာအမည်</th>
           <th class="text-center">စာအုပ်အကြိမ်ရေ</th>
@@ -29,8 +29,8 @@
         </thead>
         <tbody *ngFor="let b of resData">
         <tr>
-          <td class="text-center">{{b.id}}</td>
-<!--          <td>{{b.categoryId}}</td>-->
+          <td class="text-center">{{b.shelves.id}}</td>
+          <td class="text-center">{{b.categories.id}}</td>
           <td >{{b.name}}</td>
           <td >{{b.author}}</td>
           <td class="text-center">{{b.edition}}</td>

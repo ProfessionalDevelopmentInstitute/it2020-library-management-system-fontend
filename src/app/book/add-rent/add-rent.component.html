@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Add Book Item</title>
+</head>
+<body>
+<div class="container mt-3">
+  <div class="card card-body shadow">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card card-body">
+          <strong class="text-center  text-lg">Add New Rent Book</strong>
+          <form class="" [formGroup]="addRentForm" (ngSubmit)="onClick()">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group mt-4">
+                  <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-indigo"><i class="fa fa-book"></i> </span>
+                    </div>
+                    <input type="text" class="form-control" formControlName="book" placeholder="Book Name">
+                  </div>
+                  <div class="text-danger small" *ngIf="addRentForm.controls.book.invalid">Book Title is required</div>
+                </div>
+                <div class="form-group mt-5">
+                  <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-indigo"><i class="fa fa-user"></i> </span>
+                    </div>
+                  <input type="text" class="form-control" formControlName="student" placeholder="Student Name">
+                  </div>
+                  <div class="text-danger small" *ngIf="addRentForm.controls.student.invalid">Student Name is required</div>
+                </div>
+                <div class="form-group mt-5">
+                  <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-indigo"><i class="fa fa-user-cog"></i> </span>
+                    </div>
+                  <input type="text" class="form-control" formControlName="librarian" placeholder="Librarian Name">
+                  </div>
+                  <div class="text-danger small" *ngIf="addRentForm.controls.librarian.invalid">Librarian Name is required</div>
+                </div>
+                <div class="form-group mt-5">
+                  <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-indigo"><i class="fa fa-calendar"></i> </span>
+                    </div>
+                  <input type="text" class="form-control" [matDatepicker]="picker1" formControlName="rentFromDate" placeholder="Rent Date">
+                    <div class="input-group-prepend">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </div>
+                  </div>
+                  <div class="text-danger small" *ngIf="addRentForm.controls.rentFromDate.invalid">Author Name is required</div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group mt-4">
+                  <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-indigo"><i class="fa fa-calendar"></i> </span>
+                    </div>
+                    <input type="text" [matDatepicker]="picker2" class="form-control" placeholder="Due Date" formControlName="rentToDate">
+                    <div class="input-group-prepend">
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </div>
+                  </div>
+                  <div class="text-danger small" *ngIf="addRentForm.controls.rentToDate.invalid">Date of Birth is required</div>
+                </div>
+                <div class="form-group mt-5">
+                  <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-indigo"><i class="fa fa-calendar"></i> </span>
+                    </div>
+                    <input type="text" [matDatepicker]="picker" class="form-control" placeholder="Return Date" formControlName="returnDate">
+                    <div class="input-group-prepend">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </div>
+                  </div>
+                  <div class="text-danger small" *ngIf="addRentForm.controls.returnDate.invalid">Return Date is required</div>
+                </div>
+                <div class="form-group mt-5">
+                  <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-indigo"><i class="fa fa-money-bill-alt"></i> </span>
+                    </div>
+                  <input type="text" class="form-control" formControlName="fine" placeholder="Fine">
+                  </div>
+                  <div class="text-danger small" *ngIf="addRentForm.controls.fine.invalid">Fine is required</div>
+                </div>
+                <div class="form-group mt-5">
+                  <div class="input-group flex-nowrap">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text text-indigo"><i class="fa fa-user-edit"></i> </span>
+                    </div>
+                  <select class="custom-select" formControlName="status">
+                    <option *ngFor="let s of Status" value="{{s}}">{{s}}</option>
+                  </select>
+                  </div>
+                  <div class="text-danger small" *ngIf="addRentForm.controls.status.invalid">Status is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group text-center">
+              <button [disabled]="addRentForm.invalid" type="submit" class="btn btn-outline-dark"><strong>Add Rent</strong></button> &nbsp; &nbsp;
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

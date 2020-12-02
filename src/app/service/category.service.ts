@@ -15,9 +15,12 @@ export class CategoryService {
     return  this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/categories');
   }
 
-  // getBookId(id: number): Observable<ResponseModel>{
-  //   return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/book/' + id);
-  // }
+  deleteCategory(id: number): Observable<ResponseModel>{
+    return this.httpClient.delete<ResponseModel>('http://localhost:8081/libMgmtSystem/category/' + id);
+  }
+  updateCategories(updB: BookCategory[]): Observable<ResponseModel> {
+    return this.httpClient.put<ResponseModel>('http://localhost:8081/libMgmtSystem/update/category', updB);
+  }
 
   createBookCategory(addBook: BookCategory): Observable<any>{
     return this.httpClient.post('http://localhost:8081/libMgmtSystem/category', addBook);

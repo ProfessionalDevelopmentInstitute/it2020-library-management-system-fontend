@@ -13,3 +13,6 @@ export class RentModel{
   book: BookModel;
   librarian: LibrarianModel;
 }
+
+export const STATUS: string[] = ['Pending', 'Accessed']
+
