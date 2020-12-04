@@ -17,7 +17,7 @@
              with font-awesome or any other icon font library -->
         <li class="nav-item has-treeview menu-open small">
 
-        <li class="nav-item has-treeview">
+        <li *ngIf="authModel.isAuthenticated && authModel.isLib"  class="nav-item has-treeview">
           <a  class="nav-link ">
             <i class="nav-icon fa fa-list-alt "></i>
             <p class=" ">
@@ -118,6 +118,23 @@
               <a routerLink="/dashboard/rent/list" class="nav-link">
                 <i class="fa fa-plus-circle nav-icon text-warning"></i>
                 <p class="small text-warning">Rent Lists</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview mt-2">
+          <a  class="nav-link">
+            <i class="nav-icon fa fa-users-cog "></i>
+            <p >
+              Manage Librarian
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/dashboard/librarian/list" class="nav-link">
+                <i class="fa fa-plus-circle nav-icon text-warning"></i>
+                <p class="small text-warning">Librarian Detail Lists</p>
               </a>
             </li>
           </ul>

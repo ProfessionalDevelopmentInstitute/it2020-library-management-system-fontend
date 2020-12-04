@@ -9,7 +9,7 @@
         <div class="row">
           <div class="card card-body shadow-lg bg-gray-light" *ngFor="let d of bookCateG">
             <div class="col-lg-12">
-              <a routerLink="/shelf/one" ><strong class="text-center text-indigo">{{d.type}}</strong></a>
+              <a (click)="onClick(d.id)" class="d-block"><strong class="text-center text-indigo">{{d.type}}</strong></a>
             </div>
           </div>
         </div>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthModel} from '../../model/auth.model';
+import {LoginManagerService} from '../../service/login-manager.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  authModel: AuthModel;
+
+  constructor(private loginManager: LoginManagerService) {
+    loginManager.isAuth.subscribe(value => {
+      this.authModel = value;
+    });
+  }
 
   ngOnInit(): void {
+
   }
 
 }

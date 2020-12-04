@@ -19,6 +19,10 @@ export class ListService {
     return this.httpClient.delete<ResponseModel>('http://localhost:8081/libMgmtSystem/book/' + id);
   }
 
+  getCategoryId(id: number): Observable<ResponseModel> {
+    return  this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/findByCategory/' + id);
+  }
+
   createBook(addBook: BookModel): Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>('http://localhost:8081/libMgmtSystem/book/', addBook);
   }

@@ -4,6 +4,7 @@ import {Subject} from 'rxjs';
 import {StudentModel} from '../../model/student.model';
 import {Router} from '@angular/router';
 import {AuthModel} from '../../model/auth.model';
+import {LibrarianModel} from '../../model/librarian.model';
 
 @Component({
   selector: 'app-navbar',
@@ -12,26 +13,24 @@ import {AuthModel} from '../../model/auth.model';
 })
 export class NavbarComponent implements OnInit {
 
-  isAuth: Subject<AuthModel> = new Subject<AuthModel>();
   studentModel: StudentModel;
-  credential: string;
+  librarianModel: LibrarianModel;
+
   title = 'AngularHttpBasic';
 
-  isAuthenticated = false;
+  authModel: AuthModel;
+
   constructor(private loginManager: LoginManagerService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.loginManager.isAuth.subscribe(value => this.isAuthenticated = value);
+    this.loginManager.isAuth.subscribe(value => {
+      this.authModel = value;
+    });
     this.loginManager.sessionSignIn();
   }
-  public logOut(): void {
-    this.isAuth.next();
-    this.credential = null;
-    this.studentModel = null;
-    localStorage.clear();
-  }
-  logout(): void {
+
+  logOut(): void {
     this.loginManager.logOut();
     this.router.navigate(['login']);
   }

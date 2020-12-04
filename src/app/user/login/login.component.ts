@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
   constructor(private loginManger: LoginManagerService, private router: Router) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required)
+      password: new FormControl('', Validators.required),
+      type: new FormControl('', Validators.required)
     });
   }
 
@@ -26,12 +27,27 @@ export class LoginComponent implements OnInit {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
     };
-    this.loginManger.signIn(login).subscribe(
-      value => {
-        this.router.navigate(['dashboard']);
-      }
-    );
-    console.log(login);
+    if(this.loginForm.value.type === 'student'){
+      this.loginManger.studentSignIn(login).subscribe(
+        value => {
+          this.router.navigate(['dashboard/home']);
+        }
+      );
+    }
+    if(this.loginForm.value.type === 'librarian'){
+      this.loginManger.librarianSignIn(login).subscribe(
+        value => {
+          this.router.navigate(['dashboard/home']);
+        }
+      );
+    }
+
+    // this.loginManger.librarianSignIn(login).subscribe(
+    //   value => {
+    //     this.router.navigate(['dashboard']);
+    //   }
+    // );
+    console.log(this.loginForm.value);
 }
 
 }

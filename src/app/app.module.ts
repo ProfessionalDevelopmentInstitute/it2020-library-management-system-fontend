@@ -31,6 +31,8 @@ import { RentComponent } from './book/rent/rent.component';
 import { AddRentComponent } from './book/add-rent/add-rent.component';
 import { CategoryListComponent } from './book/category/category-list/category-list.component';
 import { HomeComponent } from './home/home.component';
+import { SettingComponent } from './dashboard/setting/setting.component';
+import { LibrarianListComponent } from './user/librarian-list/librarian-list.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: 'login', pathMatch: 'full' },
@@ -39,6 +41,8 @@ const routes: Routes = [
   {path: 'dashboard', component: NavbarComponent,
   children:[
     {path: 'home', component: HomeComponent},
+    {path: 'setting', component: SettingComponent},
+    {path: 'librarian/list', component: LibrarianListComponent},
     {path: 'book/category', component: CategoryComponent},
     {path: 'book/list', component: ListsComponent},
     {path: 'librarian/register', component: LibrarianRegisterComponent},
@@ -79,7 +83,9 @@ const routes: Routes = [
     RentComponent,
     AddRentComponent,
     CategoryListComponent,
-    HomeComponent
+    HomeComponent,
+    SettingComponent,
+    LibrarianListComponent
   ],
   imports: [
     BrowserModule,

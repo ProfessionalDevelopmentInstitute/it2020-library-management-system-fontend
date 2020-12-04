@@ -7,6 +7,7 @@ import {BookModel} from '../../model/book.model';
 import {LibraryCardModel} from '../../model/library-card.model';
 import {CredentialModel} from '../../model/credential.model';
 import {ValidatorService} from '../../service/validator.service';
+import {CredentialService} from '../../service/credential.service';
 
 @Component({
   selector: 'app-student-list',
@@ -14,6 +15,8 @@ import {ValidatorService} from '../../service/validator.service';
   styleUrls: ['./student-list.component.css']
 })
 export class StudentListComponent implements OnInit {
+
+  user:any;
 
   closeResult: string;
   idToDelete: number;
@@ -32,7 +35,8 @@ export class StudentListComponent implements OnInit {
   address: string;
   name: StudentModel['name'];
   inputForm: FormGroup;
-  constructor(private studentService: StudentService, private modalService: NgbModal , private validatorService: ValidatorService) {
+  constructor(private studentService: StudentService, private modalService: NgbModal ,
+              private validatorService: ValidatorService, private credentialService: CredentialService) {
     this.updateStudForm = new FormGroup({
       libraryCard: new FormControl('', Validators.required),
       name: new FormControl('', [Validators.required]),
@@ -58,20 +62,24 @@ export class StudentListComponent implements OnInit {
         console.log(value.result);
       }
     );
+
   }
-  clicker(searchInfo): void{
+  clicker(): void{
     const name = this.inputForm.value.name;
     console.log(name);
     this.studentService.getStudents().subscribe(
       value => {
         this.studentService.searchStudent().subscribe(
           res => {
-            this.student = value.result.name;
+            this.student = value.result;
             console.log(this.student)
           }
         );
       },
     );
+  }
+  search(searchInfo): void{
+    this.user.name = this.StudName.value;
   }
 
   get StudName()
@@ -100,7 +108,7 @@ export class StudentListComponent implements OnInit {
     const up: StudentModel = {
       id: this.idToUpdate,
       name: this.updateStudForm.value.name,
-      email: this.updateStudForm.value.email,
+      email: this.cre[this.updateStudForm.value.email],
       address: this.updateStudForm.value.address,
       phone: this.updateStudForm.value.phone,
       dateOfBirth: this.updateStudForm.value.dateOfBirth,

@@ -20,7 +20,7 @@
         <a class="nav-link text-warning" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a routerLink="/dashboard/home" class="nav-link text-warning">Home</a>
+        <a routerLink="/dashboard/home" class="nav-link text-warning" >Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link text-warning">Contact</a>
@@ -66,14 +66,14 @@
             <i class="fa fa-user-cog fa-2x text-warning"></i>
           </a>
           <div class="dropdown-menu dropdown-menu dropdown-menu-right">
-            <a href="#" class="dropdown-item">
+            <a  class="d-block dropdown-item">
               <i class="fa fa-user-circle"> &nbsp; &nbsp;<strong>Profile</strong></i>
             </a>
-            <a href="#" class="d-block dropdown-item">
+            <a routerLink="/dashboard/setting" class="d-block dropdown-item">
               <i class="fa fa-cogs">&nbsp; &nbsp;<strong>Setting</strong></i>
             </a>
             <div class="dropdown-divider"></div>
-            <a (click)="logout()" *ngIf="isAuthenticated" class="d-block dropdown-item">
+            <a (click)="logOut()" *ngIf="authModel.isAuthenticated" class="d-block dropdown-item">
               <i class="fa fa-sign-out-alt">&nbsp; &nbsp;<strong>Log Out</strong></i>
             </a>
           </div>

@@ -15,6 +15,10 @@ export class CategoryService {
     return  this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/categories');
   }
 
+  getCategoryId(id: number): Observable<ResponseModel> {
+    return  this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/category/' + id);
+  }
+
   deleteCategory(id: number): Observable<ResponseModel>{
     return this.httpClient.delete<ResponseModel>('http://localhost:8081/libMgmtSystem/category/' + id);
   }

@@ -22,16 +22,20 @@ export class LoginService {
     return 'Basic ' + encrypt;
   }
 
-  public signIn(login: LoginModel): Observable<StudentModel> {
+  public signIn(login: LoginModel, type: TYPE): Observable<any> {
     const encrypt: string = this.encrypt(login);
     const httpHeader: HttpHeaders = new HttpHeaders({
       Authorization: encrypt
     });
-    return this.httpClient.post<StudentModel>(
-      'http://localhost:8081/libMgmtSystem/student/login',
+    return this.httpClient.post<any>(
+      'http://localhost:8081/libMgmtSystem/' + type + '/login',
       null,
       {headers: httpHeader}
     );
   }
 
+}
+
+export enum TYPE {
+  Student = 'student', Librarian = 'librarian'
 }
