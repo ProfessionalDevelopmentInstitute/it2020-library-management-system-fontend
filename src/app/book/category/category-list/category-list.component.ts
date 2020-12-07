@@ -20,7 +20,9 @@ export class CategoryListComponent implements OnInit {
   idToDelete: number;
   idToUpdate: number;
   addForm: FormGroup;
-  category: BookCategory;
+  category: BookCategory[];
+  p: Number = 1;
+  count: Number = 10;
   constructor(private cateService: CategoryService, private categoryService: CategoryService,
               private router: Router, private modalService: NgbModal,) {
     this.addForm = new FormGroup({
@@ -32,11 +34,20 @@ export class CategoryListComponent implements OnInit {
       description: new FormControl('', Validators.required),
     });
   }
+  SearchTyp(): void{
+    const type = this.updateForm.value.type;
+    console.log(type);
+    this.categoryService.searchCateType(type).subscribe(
+      value => {
+        this.category = value.result;
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.categoryService.getBookCategory().subscribe(
       value => {
-        this.category = value.result;
+        this.category = value.result.content;
       }
     );
   }

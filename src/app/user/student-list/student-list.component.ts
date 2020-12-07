@@ -21,6 +21,7 @@ export class StudentListComponent implements OnInit {
   closeResult: string;
   idToDelete: number;
   idToUpdate: number;
+  idToUserById: number;
   updateStudForm: FormGroup;
   student: StudentModel[];
   result: LibraryCardModel[];
@@ -35,6 +36,8 @@ export class StudentListComponent implements OnInit {
   address: string;
   name: StudentModel['name'];
   inputForm: FormGroup;
+  p: Number = 1;
+  count: Number = 5;
   constructor(private studentService: StudentService, private modalService: NgbModal ,
               private validatorService: ValidatorService, private credentialService: CredentialService) {
     this.updateStudForm = new FormGroup({
@@ -45,10 +48,7 @@ export class StudentListComponent implements OnInit {
       address: new FormControl('', [Validators.required]),
       dateOfBirth: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
-      passwords: new FormGroup({
-        password: new FormControl(null),
-        confirmPassword: new FormControl(null)
-      }, [Validators.required, this.validatorService.confirmPasswordValidator]),
+      password: new FormControl('', Validators.required),
     });
     this.inputForm = new FormGroup({
       name: new FormControl(null)
@@ -56,9 +56,15 @@ export class StudentListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.credentialService.getUserById(this.idToUserById).subscribe(
+    //   value => {
+    //     this.cre = value.result;
+    //     console.log(value.result);
+    //   }
+    // );
     this.studentService.getStudents().subscribe(
       value => {
-        this.student= value.result;
+        this.student= value.result.content;
         console.log(value.result);
       }
     );
@@ -67,25 +73,13 @@ export class StudentListComponent implements OnInit {
   clicker(): void{
     const name = this.inputForm.value.name;
     console.log(name);
-    this.studentService.getStudents().subscribe(
-      value => {
-        this.studentService.searchStudent().subscribe(
-          res => {
-            this.student = value.result;
-            console.log(this.student)
-          }
-        );
-      },
-    );
-  }
-  search(searchInfo): void{
-    this.user.name = this.StudName.value;
+   this.studentService.searchStudent(name).subscribe(
+     value => {
+       this.student = value.result;
+     }
+   );
   }
 
-  get StudName()
-  {
-    return this.inputForm.get('name');
-  }
 
   DeleteStud(): void{
     this.studentService.deleteStudent(this.idToDelete).subscribe(
@@ -94,6 +88,7 @@ export class StudentListComponent implements OnInit {
       }
     );
   }
+
   onDelete(close, id: number) {
     this.idToDelete = id;
     console.log(id)
@@ -108,11 +103,11 @@ export class StudentListComponent implements OnInit {
     const up: StudentModel = {
       id: this.idToUpdate,
       name: this.updateStudForm.value.name,
-      email: this.cre[this.updateStudForm.value.email],
+      email: this.updateStudForm.value.email,
       address: this.updateStudForm.value.address,
       phone: this.updateStudForm.value.phone,
       dateOfBirth: this.updateStudForm.value.dateOfBirth,
-      password: this.updateStudForm.value.passwords.password,
+      password: this.updateStudForm.value.password,
       role: this.updateStudForm.value.role,
       libraryCard: this.updateStudForm.value.libraryCard,
     }
@@ -130,15 +125,32 @@ export class StudentListComponent implements OnInit {
 
   onUpdate(update, upd: StudentModel) {
     this.idToUpdate = upd.id;
+    this.idToUserById = upd.id;
     // this.category = cate.id;
     this.modalService.open(update, {ariaLabelledBy: 'updateModal'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+    this.credentialService.getUserById(this.idToUserById).subscribe(
+      value => {
+        this.cre = value.result;
+        console.log(value.result);
+      }
+    );
     console.log(this.idToUpdate);
+    console.log(this.idToUserById);
     // this.updateForm.reset(this.idToUpdate);
-    this.updateStudForm.reset(upd);
+    this.updateStudForm.reset({
+      id: upd.id,
+      name: upd.name,
+      role: upd.role,
+      email: upd.email,
+      dateOfBirth: upd.dateOfBirth,
+      address: upd.address,
+      phone: upd.phone,
+      libraryCard: upd.libraryCard.rollNo
+    });
   }
 
   open(content, stud: StudentModel) {

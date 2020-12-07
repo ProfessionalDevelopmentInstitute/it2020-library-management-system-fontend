@@ -12,4 +12,8 @@ export class CredentialService {
   getCredentials(): Observable<ResponseModel> {
     return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/credentials');
   }
+
+  getUserById(id: number): Observable<ResponseModel>{
+    return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/findByCredentialUserId/' + id);
+  }
 }

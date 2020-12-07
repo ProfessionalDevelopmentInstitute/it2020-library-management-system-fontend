@@ -22,6 +22,8 @@ export class LibrarianListComponent implements OnInit {
   idToUpdate: number;
   librarian: LibrarianModel[];
   updateLForm: FormGroup;
+  p : Number = 1;
+  count: Number = 5;
   constructor(private librarianService: LibrarianService, private modalService: NgbModal,
               private validatorService: ValidatorService) {
     this.updateLForm = new FormGroup({
@@ -37,11 +39,20 @@ export class LibrarianListComponent implements OnInit {
       }, [Validators.required, this.validatorService.confirmPasswordValidator]),
     });
   }
-
+  SearchByName(): void{
+    const name = this.updateLForm.value.name;
+    console.log(name);
+    this.librarianService.searchByName(name).subscribe(
+      value => {
+        this.librarian = value.result;
+        console.log(value.result);
+      }
+    );
+  }
   ngOnInit(): void {
     this.librarianService.getLibrarians().subscribe(
       value => {
-        this.librarian= value.result;
+        this.librarian= value.result.content;
         console.log(value.result);
       }
     );

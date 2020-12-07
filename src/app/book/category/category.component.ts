@@ -4,6 +4,7 @@ import {BookCategory} from '../../model/category.model';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ListService} from '../../service/list.service';
 import {BookModel} from '../../model/book.model';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-category',
@@ -16,23 +17,31 @@ export class CategoryComponent implements OnInit {
   idToCategoryId: number;
   lists: BookModel[];
   cateId: BookCategory[];
+  searchForm: FormGroup;
   constructor(public categoryService: CategoryService, private router: Router,
-              public route: ActivatedRoute, private listService: ListService) { }
+              public route: ActivatedRoute, private listService: ListService) {
+    this.searchForm = new FormGroup({
+      type: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+    });
+  }
 
   ngOnInit(): void {
-    // this.listService.getBooks().subscribe(
-    //   value => {
-    //     this.lists = value.result;
-    //     console.log(value.result);
-    //   }
-    // );
-
     this.categoryService.getBookCategory().subscribe(
       res => {
-        this.bookCateG = res.result
+        this.bookCateG = res.result.content
         console.log(res);
         },
       error => {}
+    );
+  }
+  SearchType(): void{
+    const type = this.searchForm.value.type;
+    console.log(type);
+    this.categoryService.searchCateType(type).subscribe(
+      value => {
+        this.bookCateG = value.result;
+      }
     );
   }
 

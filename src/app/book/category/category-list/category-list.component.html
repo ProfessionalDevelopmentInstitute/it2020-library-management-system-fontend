@@ -35,7 +35,13 @@
     </div>
     <div class="col-sm-8">
       <div class="card card-body">
-        <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Category</a>
+        <div >
+          <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Category</a>
+          <form [formGroup]="updateForm" (ngSubmit)="SearchTyp()" class="float-right">
+            <input type="text" class="small sm" placeholder="Search By Type" formControlName="type">&nbsp;
+            <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
         <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
           <table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">
             <thead class="bg-warning text-indigo">
@@ -46,7 +52,7 @@
               <th class="text-center">Actions</th>
             </tr>
             </thead>
-            <tbody *ngFor="let c of category">
+            <tbody *ngFor="let c of category | paginate: {itemsPerPage: 5, currentPage : p}">
             <tr>
               <td class="text-center">{{c.id}}</td>
               <td class="text-center">{{c.type}}</td>
@@ -59,6 +65,7 @@
             </tr>
             </tbody>
           </table>
+          <pagination-controls class="myPagination" (pageChange)="p = $event"></pagination-controls>
         </div>
       </div>
     </div>

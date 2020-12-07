@@ -6,7 +6,7 @@ export interface StudentModel {
   name: string;
   phone: string;
   address: string;
-  email: CredentialModel;
+  email: string;
   dateOfBirth: Date;
   password?: string;
   role?: string;

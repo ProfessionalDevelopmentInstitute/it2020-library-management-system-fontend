@@ -33,7 +33,7 @@
         </tr>
         </thead>
         <tbody >
-        <tr *ngFor="let s of student">
+        <tr *ngFor="let s of student | paginate: {itemsPerPage: 5, currentPage : p}">
           <td class="text-center">{{s.id}}</td>
 <!--          <td></td>-->
           <td class="text-center">{{s.name}}</td>
@@ -49,6 +49,7 @@
         </tr>
         </tbody>
       </table>
+      <pagination-controls class="myPagination" (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
 </div>
@@ -97,7 +98,7 @@
   </div>
 </ng-template>
 <!--  end modal-->
-<!--  delete model-->
+<!--  edit model-->
 <ng-template #update let-modal class="modal fade">
   <div class="modal-header">
     <span class="text-warning"><h5 class="modal-title text-center" id="updateModal">Update Student Info</h5></span>
@@ -155,11 +156,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fa fa-calendar"></i> </span>
           </div>
-          <input type="text" [matDatepicker]="picker" class="form-control" placeholder="Date of Birth" formControlName="dateOfBirth">
-          <div class="input-group-prepend">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </div>
+          <input type="text" class="form-control" placeholder="Date of Birth" formControlName="dateOfBirth">
         </div>
         <div class="text-danger small" *ngIf="updateStudForm.controls.dateOfBirth.invalid">Date of Birth is required</div>
       </div>
@@ -174,26 +171,14 @@
         </div>
         <div class="text-danger small" *ngIf="updateStudForm.controls.role.invalid">User Role is required</div>
       </div>
-      <div formGroupName="passwords">
-        <div class="form-group">
-          <div class="input-group flex-nowrap">
-            <div class="input-group-prepend">
-              <span class="input-group-text" ><i class="fa fa-lock"></i> </span>
-            </div>
-            <input type="password" class="form-control" placeholder="******" formControlName="password">
+      <div class="form-group">
+        <div class="input-group flex-nowrap">
+          <div class="input-group-prepend">
+            <span class="input-group-text" ><i class="fa fa-phone"></i> </span>
           </div>
+          <input type="text" class="form-control" placeholder="******" formControlName="password">
         </div>
-        <div class="form-group">
-          <div class="input-group flex-nowrap">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fa fa-lock"></i> </span>
-            </div>
-            <input type="password" class="form-control" placeholder="******" formControlName="confirmPassword">
-          </div>
-        </div>
-        <div class="text-danger" *ngIf="updateStudForm.touched && updateStudForm.controls.passwords.errors !== null && updateStudForm.controls.passwords.errors.PasswordNotMergeError">
-          * password and confirm password must be same.
-        </div>
+        <div class="text-danger small" *ngIf="updateStudForm.controls.password.invalid">Password is required</div>
       </div>
       <hr>
       <div class="form-group float-right">

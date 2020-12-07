@@ -11,6 +11,8 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  sName: string;
+  lName: string
   loginForm: FormGroup;
   constructor(private loginManger: LoginManagerService, private router: Router) {
     this.loginForm = new FormGroup({
@@ -30,6 +32,7 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.value.type === 'student'){
       this.loginManger.studentSignIn(login).subscribe(
         value => {
+          console.log(value.name)
           this.router.navigate(['dashboard/home']);
         }
       );
@@ -37,16 +40,12 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.value.type === 'librarian'){
       this.loginManger.librarianSignIn(login).subscribe(
         value => {
+          console.log(value.name)
           this.router.navigate(['dashboard/home']);
         }
       );
     }
 
-    // this.loginManger.librarianSignIn(login).subscribe(
-    //   value => {
-    //     this.router.navigate(['dashboard']);
-    //   }
-    // );
     console.log(this.loginForm.value);
 }
 

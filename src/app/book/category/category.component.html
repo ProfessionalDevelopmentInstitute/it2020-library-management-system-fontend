@@ -1,10 +1,15 @@
 
 
-<div class="container mt-5">
-  <h4 class="text-center text-indigo"><strong>Book Category In UCST(Thaton) Library</strong></h4>
+<div class="container mt-2">
+  <h4 class="text-center text-indigo mt-3"><strong>Book Category In UCST(Thaton) Library</strong></h4>
   <div class="container mt-3 sm">
     <div class="card card-body bg-transparent shadow ">
-      <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> <strong>Add New Category</strong></a>
+      <div >
+        <form [formGroup]="searchForm" (ngSubmit)="SearchType()" class="float-right">
+          <input type="text" class="small sm" placeholder="Search By Type" formControlName="type">&nbsp;
+          <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
       <div class="container mt-3" >
         <div class="row">
           <div class="card card-body shadow-lg bg-gray-light" *ngFor="let d of bookCateG">

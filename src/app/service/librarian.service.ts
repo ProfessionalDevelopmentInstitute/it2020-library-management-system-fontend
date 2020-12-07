@@ -17,10 +17,10 @@ export class LibrarianService {
   getLibrarians(): Observable<ResponseModel> {
     return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/librarians');
   }
+  searchByName(name: string): Observable<ResponseModel> {
+    return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/search/librarian?name=' + name);
+  }
 
-  // searchStudent(): Observable<ResponseModel> {
-  //   return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/search/student/' + name);
-  // }
   deleteLibrarian(id: number): Observable<ResponseModel>{
     return this.httpClient.delete<ResponseModel>('http://localhost:8081/libMgmtSystem/librarian/' + id);
   }

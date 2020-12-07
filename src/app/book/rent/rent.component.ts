@@ -25,6 +25,8 @@ export class RentComponent implements OnInit {
   res: any;
   closeResult: string;
   Status = STATUS;
+  p: Number = 1;
+  count: Number = 10;
   constructor(private rentService: RentService, private modalService: NgbModal, private bookService: ListService) {
     this.addRForm = new FormGroup({
       rentFromDate: new FormControl('', Validators.required),
@@ -37,11 +39,20 @@ export class RentComponent implements OnInit {
       librarian: new FormControl('', Validators.required),
     });
   }
-
+  SearchByName(): void{
+    const student = this.addRForm.value.student;
+    console.log(student);
+    this.rentService.searchByName(student).subscribe(
+      value => {
+        this.rent = value.result;
+        console.log(value.result);
+      }
+    );
+  }
   ngOnInit(): void {
     this.rentService.getRentLists().subscribe(
       value => {
-        this.rent = value.result;
+        this.rent = value.result.content;
         console.log(value.result)
       },
       error => {},

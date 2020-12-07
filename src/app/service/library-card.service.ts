@@ -15,7 +15,9 @@ export class LibraryCardService {
   getLibraryCard(): Observable<ResponseModel> {
     return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/libraryCards');
   }
-
+  searchByRollNo(rollNo: string): Observable<ResponseModel> {
+    return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/search/libraryCard?rollNo=' + rollNo);
+  }
   createLibraryCard(addCard: LibraryCardModel): Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>('http://localhost:8081/libMgmtSystem/create/libraryCard/', addCard);
   }

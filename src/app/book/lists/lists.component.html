@@ -8,9 +8,15 @@
   <title>Document</title>
 </head>
 <body>
-<div class="container-fluid mt-5">
+<div class="container-fluid mt-3">
   <div class="card card-body">
-    <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Book</a>
+    <div>
+      <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Book</a>
+      <form [formGroup]="searchForm" (ngSubmit)="search()" class="float-right">
+        <input type="text" class="small sm" placeholder="Search By Book Name" formControlName="name">
+        <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
     <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
       <table  class="display table table-striped table-bordered table-hover" style="width:100%">
         <thead class="bg-warning text-indigo">
@@ -27,7 +33,7 @@
           <th class="text-center">Actions</th>
         </tr>
         </thead>
-        <tbody *ngFor="let b of resData">
+        <tbody *ngFor="let b of resData | paginate:{itemsPerPage: 5, currentPage : p}">
         <tr>
           <td class="text-center">{{b.shelves.id}}</td>
           <td class="text-center">{{b.categories.id}}</td>
@@ -46,6 +52,7 @@
         </tr>
         </tbody>
       </table>
+      <pagination-controls class="myPagination" (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
 </div>

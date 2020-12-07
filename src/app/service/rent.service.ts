@@ -14,7 +14,9 @@ export class RentService {
   getRentLists(): Observable<ResponseModel> {
     return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/rents');
   }
-
+  searchByName(name: string): Observable<ResponseModel> {
+    return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/search/rent?studentName=' + name);
+  }
   createRentList(addRent: RentModel): Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>('http://localhost:8081/libMgmtSystem/create/rent/', addRent);
   }

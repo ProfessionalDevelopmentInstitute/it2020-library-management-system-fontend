@@ -15,8 +15,8 @@ export class StudentService {
     return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/students');
   }
 
-  searchStudent(): Observable<ResponseModel> {
-    return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/search/student/' + name);
+  searchStudent(name: string): Observable<ResponseModel> {
+    return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/search/student?name=' + name);
   }
   deleteStudent(id: number): Observable<ResponseModel>{
     return this.httpClient.delete<ResponseModel>('http://localhost:8081/libMgmtSystem/student/' + id);

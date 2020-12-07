@@ -15,6 +15,12 @@ export class ListService {
     return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/books');
   }
 
+  // searchBook(name: string, author: string, edition: string): Observable<ResponseModel> {
+  //   return this.httpClient.get<ResponseModel>(`http://localhost:8081/libMgmtSystem/book/search?name=${name}&author=${author}&edition=${edition}`);
+  // }
+  searchBookName(name: string): Observable<ResponseModel> {
+    return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/book/search?name=' + name);
+  }
   deleteBook(id: number): Observable<ResponseModel>{
     return this.httpClient.delete<ResponseModel>('http://localhost:8081/libMgmtSystem/book/' + id);
   }

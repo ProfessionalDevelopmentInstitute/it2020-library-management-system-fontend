@@ -7,6 +7,7 @@ import {BookCategory} from '../../model/category.model';
 import {Shelf} from '../../model/shelf.model';
 import {CategoryService} from '../../service/category.service';
 import {ShelfService} from '../../service/shelf.service';
+import {SearchModel} from '../../model/search.model';
 
 
 declare var $: any;
@@ -28,9 +29,10 @@ export class ListsComponent implements OnInit {
   updateResult: any;
   result: BookCategory[];
   shelf: Shelf[];
-
-
+  p: Number = 1;
+  count: Number = 10;
   updateForm: FormGroup;
+  searchForm: FormGroup;
 
   constructor(public bookService: ListService, private modalService: NgbModal,
               private categoryService: CategoryService, private shelfService: ShelfService) {
@@ -44,12 +46,29 @@ export class ListsComponent implements OnInit {
       categories: new FormControl('', Validators.required),
       shelves: new FormControl('', Validators.required)
     });
+    this.searchForm = new FormGroup({
+      name: new FormControl(null),
+      author: new FormControl(''),
+      edition: new FormControl('')
+    })
+  }
+  search(): void{
+      const name = this.searchForm.value.name;
+      const author= this.searchForm.value.author;
+      const edition = this.searchForm.value.edition;
+    console.log(name);
+    this.bookService.searchBookName(name).subscribe(
+      value => {
+        this.resData = value.result;
+      }
+    );
+
   }
 
   ngOnInit(): void {
     this.bookService.getBooks().subscribe(
       value => {
-        this.resData= value.result;
+        this.resData= value.result.content;
         console.log(value.result);
       }
     );

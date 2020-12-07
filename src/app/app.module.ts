@@ -33,6 +33,7 @@ import { CategoryListComponent } from './book/category/category-list/category-li
 import { HomeComponent } from './home/home.component';
 import { SettingComponent } from './dashboard/setting/setting.component';
 import { LibrarianListComponent } from './user/librarian-list/librarian-list.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 const routes: Routes = [
   { path: '',   redirectTo: 'login', pathMatch: 'full' },
@@ -85,22 +86,23 @@ const routes: Routes = [
     CategoryListComponent,
     HomeComponent,
     SettingComponent,
-    LibrarianListComponent
+    LibrarianListComponent,
   ],
-  imports: [
-    BrowserModule,
-    DataTablesModule,
-    AppRoutingModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    NgbModule,
-    RouterModule.forRoot(routes)
-  ],
+    imports: [
+        BrowserModule,
+        DataTablesModule,
+        AppRoutingModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        NgbModule,
+        NgxPaginationModule,
+        RouterModule.forRoot(routes),
+    ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: BasicAuthService,

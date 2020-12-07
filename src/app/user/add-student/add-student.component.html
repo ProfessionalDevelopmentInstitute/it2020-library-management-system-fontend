@@ -8,7 +8,7 @@
   <title>Add Student</title>
 </head>
 <body>
-<div class="container mt-5">
+<div class="container mt-2">
   <div class="card card-body shadow">
     <div class="row">
       <!--      <div class="col-sm-1"></div>-->
@@ -34,7 +34,7 @@
             <div class="form-group">
               <label class="small"><i class="fa fa-list-alt text-indigo"></i> School Url</label>
               <input type="text" class="form-control" formControlName="logoUrl">
-              <div class="text-danger small" *ngIf="addLForm.controls.logoUrl.invalid">Category Type is required</div>
+              <div class="text-danger small" *ngIf="addLForm.controls.logoUrl.invalid">Logo is required</div>
             </div>
             <div class="form-group ">
               <button [disabled]="addLForm.invalid" type="submit" class="btn btn-outline-dark form-control"><strong>Add</strong></button>
@@ -44,9 +44,15 @@
       </div>
       <div class="col-lg-8">
           <div class="card card-body">
-            <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Book</a>
+            <div >
+              <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Library Card</a>
+              <form [formGroup]="addLForm" (ngSubmit)="SearchByRollNo()" class="float-right">
+                <input type="text" class="small sm" placeholder="Search By RollNo" formControlName="rollNo">&nbsp;
+                <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
+              </form>
+            </div>
             <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
-              <table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">
+              <table class="display table table-striped table-bordered table-hover" style="width:100%">
                 <thead class="bg-warning text-indigo">
                 <tr>
                   <th class="text-center">ID</th>
@@ -59,7 +65,7 @@
                   <th class="text-center">Actions</th>
                 </tr>
                 </thead>
-                <tbody *ngFor="let c of result">
+                <tbody *ngFor="let c of result | paginate: {itemsPerPage: 10, currentPage : p}">
                 <tr>
                   <td class="text-center">{{c.id}}</td>
                   <!--          <td>{{b.categoryId}}</td>-->
@@ -75,6 +81,7 @@
                 </tr>
                 </tbody>
               </table>
+              <pagination-controls class="myPagination" (pageChange)="p = $event"></pagination-controls>
             </div>
           </div>
         </div>

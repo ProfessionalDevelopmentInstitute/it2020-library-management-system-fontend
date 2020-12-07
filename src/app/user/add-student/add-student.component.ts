@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {LibraryCardService} from '../../service/library-card.service';
 import {LibraryCardModel} from '../../model/library-card.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {BookModel} from '../../model/book.model';
 
 @Component({
   selector: 'app-add-student',
@@ -26,7 +25,16 @@ export class AddStudentComponent implements OnInit {
   rollNo: string;
   year: string;
   logoUrl: string;
+  // private page: number=0;
+  // items = [];
+  // pageOfItems: Array<any>;
+
+  p: Number = 1;
+  count: Number = 10;
+
   constructor(private libraryCService: LibraryCardService, private modalService: NgbModal, private router: Router) {
+
+
     this.addLForm = new FormGroup({
       name: new FormControl('', Validators.required),
       year: new FormControl('', Validators.required),
@@ -41,13 +49,26 @@ export class AddStudentComponent implements OnInit {
     });
   }
 
+  SearchByRollNo(): void{
+    const rollNo = this.addLForm.value.rollNo;
+    console.log(rollNo);
+    this.libraryCService.searchByRollNo(rollNo).subscribe(
+      value => {
+        this.result = value.result;
+        console.log(value.result);
+      }
+    );
+  }
+
   ngOnInit(): void {
     this.libraryCService.getLibraryCard().subscribe(
       value => {
-        this.result = value.result;
-        console.log(value.message)
+        this.result = value.result.content;
+        console.log(value.result)
+
       }
     );
+
   }
 
   onSubmit(): void{
@@ -139,6 +160,15 @@ export class AddStudentComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
-
 }
+// function createNewLibraryCard(id: number): LibraryCardModel {
+//   const name =
+//     NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
+//     NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+//
+//   return {
+//     id: id.toString(),
+//     name: name,
+//     progress: Math.round(Math.random() * 100).toString(),
+//   };
+// }

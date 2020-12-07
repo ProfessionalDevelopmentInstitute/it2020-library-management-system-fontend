@@ -10,7 +10,13 @@
 <body>
 <div class="container-fluid mt-2">
   <div class="card card-body">
-
+    <div >
+      <a class="text-warning" routerLink="/add/new/rent"><i class="fa fa-plus-circle"></i> Add New Rent</a>
+      <form [formGroup]="updateLForm" (ngSubmit)="SearchByName()" class="float-right">
+        <input type="text" class="small sm" placeholder="Search By Name" formControlName="name">&nbsp;
+        <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
     <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
       <table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">
         <thead class="bg-warning text-indigo">
@@ -25,7 +31,7 @@
         </tr>
         </thead>
         <tbody >
-        <tr *ngFor="let s of librarian">
+        <tr *ngFor="let s of librarian | paginate:{ itemsPerPage: 5, currentPage : p}">
           <td class="text-center">{{s.id}}</td>
           <!--          <td></td>-->
           <td class="text-center">{{s.name}}</td>
@@ -40,6 +46,7 @@
         </tr>
         </tbody>
       </table>
+      <pagination-controls class="myPagination" (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
   <!--  delete model-->
