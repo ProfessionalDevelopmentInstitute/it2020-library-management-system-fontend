@@ -52,7 +52,7 @@ export class RentComponent implements OnInit {
   ngOnInit(): void {
     this.rentService.getRentLists().subscribe(
       value => {
-        this.rent = value.result.content;
+        this.rent = value.result;
         console.log(value.result)
       },
       error => {},

@@ -52,7 +52,7 @@ export class LibrarianListComponent implements OnInit {
   ngOnInit(): void {
     this.librarianService.getLibrarians().subscribe(
       value => {
-        this.librarian= value.result.content;
+        this.librarian= value.result;
         console.log(value.result);
       }
     );

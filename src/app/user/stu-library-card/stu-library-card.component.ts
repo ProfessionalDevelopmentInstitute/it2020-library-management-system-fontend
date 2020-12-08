@@ -1,16 +1,16 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {LibraryCardService} from '../../service/library-card.service';
+import { Component, OnInit } from '@angular/core';
 import {LibraryCardModel} from '../../model/library-card.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {LibraryCardService} from '../../service/library-card.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-add-student',
-  templateUrl: './add-student.component.html',
-  styleUrls: ['./add-student.component.css']
+  selector: 'app-stu-library-card',
+  templateUrl: './stu-library-card.component.html',
+  styleUrls: ['./stu-library-card.component.css']
 })
-export class AddStudentComponent implements OnInit {
+export class StuLibraryCardComponent implements OnInit {
 
   closeResult: string;
   idToDelete: number;
@@ -28,12 +28,12 @@ export class AddStudentComponent implements OnInit {
   // private page: number=0;
   // items = [];
   // pageOfItems: Array<any>;
-
+  message: string;
+  size: number;
+  pageNumber: number;
   p: Number = 1;
-  count: Number = 10;
-
+  // count: Number = 5;
   constructor(private libraryCService: LibraryCardService, private modalService: NgbModal, private router: Router) {
-
 
     this.addLForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -63,12 +63,10 @@ export class AddStudentComponent implements OnInit {
   ngOnInit(): void {
     this.libraryCService.getLibraryCard().subscribe(
       value => {
-        this.result = value.result.content;
-        console.log(value.result)
-
+        this.result = value.result;
+        console.log(value.message)
       }
     );
-
   }
 
   onSubmit(): void{
@@ -81,10 +79,15 @@ export class AddStudentComponent implements OnInit {
     console.log(addLCard);
     this.libraryCService.createLibraryCard(addLCard).subscribe(
       value => {
+        // this.message = value.message;
+        setTimeout(() => {
+          this.message = value.message
+          alert(value.message);
+        }, 3000);
         console.log(value);
       }
     );
-    this.router.navigate(['add/library/card'])
+    this.router.navigate(['/dashboard/student/library/card'])
   }
   DeleteLibCard(){
     this.libraryCService.deleteLibCard(this.idToDelete)
@@ -160,15 +163,5 @@ export class AddStudentComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
 }
-// function createNewLibraryCard(id: number): LibraryCardModel {
-//   const name =
-//     NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-//     NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-//
-//   return {
-//     id: id.toString(),
-//     name: name,
-//     progress: Math.round(Math.random() * 100).toString(),
-//   };
-// }

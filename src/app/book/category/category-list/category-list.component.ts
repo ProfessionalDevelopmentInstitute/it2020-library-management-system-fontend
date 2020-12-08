@@ -47,7 +47,7 @@ export class CategoryListComponent implements OnInit {
   ngOnInit(): void {
     this.categoryService.getBookCategory().subscribe(
       value => {
-        this.category = value.result.content;
+        this.category = value.result;
       }
     );
   }

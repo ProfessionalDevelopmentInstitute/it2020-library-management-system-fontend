@@ -11,7 +11,7 @@
 <div class="container-fluid mt-3">
   <div class="card card-body">
     <div>
-      <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Book</a>
+      <a class="text-warning" routerLink="/dashboard/add/new/items"><i class="fa fa-plus-circle"></i> Add New Book</a>
       <form [formGroup]="searchForm" (ngSubmit)="search()" class="float-right">
         <input type="text" class="small sm" placeholder="Search By Book Name" formControlName="name">
         <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>

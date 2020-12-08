@@ -18,8 +18,12 @@ export class CategoryComponent implements OnInit {
   lists: BookModel[];
   cateId: BookCategory[];
   searchForm: FormGroup;
+  bookLists: BookModel[];
+  p: Number = 1;
+  q: Number = 1;
   constructor(public categoryService: CategoryService, private router: Router,
-              public route: ActivatedRoute, private listService: ListService) {
+              public route: ActivatedRoute, private listService: ListService,
+              private bookService: ListService) {
     this.searchForm = new FormGroup({
       type: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
@@ -27,9 +31,14 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.bookService.getBooks().subscribe(
+      value => {
+        this.lists = value.result
+      }
+    );
     this.categoryService.getBookCategory().subscribe(
       res => {
-        this.bookCateG = res.result.content
+        this.bookCateG = res.result
         console.log(res);
         },
       error => {}
@@ -48,12 +57,18 @@ export class CategoryComponent implements OnInit {
   onClick(id: number): void{
     this.idToCategoryId = id;
     console.log(id);
-    this.categoryService.getCategoryId(id).subscribe(
+    this.bookService.getCategoryId(id).subscribe(
       value => {
-        this.cateId = value.result;
-        console.log(this.cateId);
+        this.bookLists = value.result;
+        console.log(value.result)
       }
     );
+    // this.categoryService.getCategoryId(id).subscribe(
+    //   value => {
+    //     this.cateId = value.result;
+    //     console.log(this.cateId);
+    //   }
+    // );
     this.router.navigate(['dashboard/book/category'])
   }
 

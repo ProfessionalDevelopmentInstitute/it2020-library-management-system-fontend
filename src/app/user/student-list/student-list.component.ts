@@ -64,7 +64,7 @@ export class StudentListComponent implements OnInit {
     // );
     this.studentService.getStudents().subscribe(
       value => {
-        this.student= value.result.content;
+        this.student= value.result;
         console.log(value.result);
       }
     );

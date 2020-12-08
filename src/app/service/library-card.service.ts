@@ -13,7 +13,7 @@ export class LibraryCardService {
 
   constructor(private httpClient: HttpClient) { }
   getLibraryCard(): Observable<ResponseModel> {
-    return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/libraryCards');
+    return this.httpClient.get<ResponseModel>(`http://localhost:8081/libMgmtSystem/libraryCards`);
   }
   searchByRollNo(rollNo: string): Observable<ResponseModel> {
     return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/search/libraryCard?rollNo=' + rollNo);

@@ -5,6 +5,9 @@ import {StudentModel} from '../../model/student.model';
 import {Router} from '@angular/router';
 import {AuthModel} from '../../model/auth.model';
 import {LibrarianModel} from '../../model/librarian.model';
+import {FormControl, FormGroup} from '@angular/forms';
+import {ListService} from '../../service/list.service';
+import {BookModel} from '../../model/book.model';
 
 @Component({
   selector: 'app-navbar',
@@ -20,7 +23,9 @@ export class NavbarComponent implements OnInit {
 
   authModel: AuthModel;
 
-  constructor(private loginManager: LoginManagerService, private router: Router) {
+  constructor(private loginManager: LoginManagerService, private router: Router,
+              ) {
+
   }
 
   ngOnInit(): void {

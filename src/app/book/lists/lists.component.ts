@@ -68,7 +68,7 @@ export class ListsComponent implements OnInit {
   ngOnInit(): void {
     this.bookService.getBooks().subscribe(
       value => {
-        this.resData= value.result.content;
+        this.resData= value.result;
         console.log(value.result);
       }
     );

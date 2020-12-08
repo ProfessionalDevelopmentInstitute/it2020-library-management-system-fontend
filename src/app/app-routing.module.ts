@@ -10,7 +10,6 @@ import {ShelfOneComponent} from './book/shelf-one/shelf-one.component';
 import {ShelvesComponent} from './book/shelves/shelves.component';
 import {AddItemComponent} from './book/add-item/add-item.component';
 import {StudentListComponent} from './user/student-list/student-list.component';
-import {AddStudentComponent} from './user/add-student/add-student.component';
 import {LibrarianRegisterComponent} from './user/register/librarian-register/librarian-register.component';
 
 const routes: Routes = [

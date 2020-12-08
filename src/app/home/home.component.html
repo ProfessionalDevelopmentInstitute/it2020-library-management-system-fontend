@@ -12,9 +12,15 @@
   <h4 class="text-center text-indigo mt-3"><strong>Welcome To UCST(Thaton) Library</strong></h4>
 <!--  <div class="container-fluid mt-3 sm">-->
     <div class="card card-body bg-transparent shadow mt-3">
+      <div>
+        <form [formGroup]="searchForm" (ngSubmit)="search()" class="float-right">
+          <input type="text" class="small sm" placeholder="Search By Book Name" formControlName="name">
+          <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
       <div class="container mt-3" >
         <div class="row">
-          <div class="card card-body small shadow-lg bg-gray-light" *ngFor="let b of bookList">
+          <div class="card card-body small shadow-lg bg-gray-light" *ngFor="let b of bookList | paginate: {itemsPerPage: 18, currentPage: p}">
             <div class="col-lg-12">
               <div class="text-center form-group">
                 <img src="http://localhost:8081/libMgmtSystem/file/get/{{b.imgUrl}}" class="img-thumbnail">
@@ -30,6 +36,7 @@
             </div>
           </div>
         </div>
+        <pagination-controls class="myPagination" (pageChange)="p = $event"></pagination-controls>
       </div>
 <!--    </div>-->
   </div>

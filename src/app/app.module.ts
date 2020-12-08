@@ -23,7 +23,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ShelvesComponent } from './book/shelves/shelves.component';
 import { AddItemComponent } from './book/add-item/add-item.component';
 import { StudentListComponent } from './user/student-list/student-list.component';
-import { AddStudentComponent } from './user/add-student/add-student.component';
 import { LibrarianRegisterComponent } from './user/register/librarian-register/librarian-register.component';
 import {Route, RouterModule, Routes} from '@angular/router';
 import {BasicAuthService} from './service/basic-auth.service';
@@ -34,6 +33,7 @@ import { HomeComponent } from './home/home.component';
 import { SettingComponent } from './dashboard/setting/setting.component';
 import { LibrarianListComponent } from './user/librarian-list/librarian-list.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { StuLibraryCardComponent } from './user/stu-library-card/stu-library-card.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: 'login', pathMatch: 'full' },
@@ -53,8 +53,8 @@ const routes: Routes = [
     {path: 'shelf/one', component: ShelfOneComponent},
     {path: 'shelves', component: ShelvesComponent},
     {path: 'add/new/items', component: AddItemComponent},
+    {path: 'student/library/card', component: StuLibraryCardComponent},
     {path: 'student/list', component: StudentListComponent},
-    {path: 'add/library/card', component: AddStudentComponent},
     {path: 'rent/list', component: RentComponent},
     {path: 'add/new/rent', component: AddRentComponent},
     {path: 'category/list', component: CategoryListComponent},
@@ -79,7 +79,7 @@ const routes: Routes = [
     ShelvesComponent,
     AddItemComponent,
     StudentListComponent,
-    AddStudentComponent,
+
     LibrarianRegisterComponent,
     RentComponent,
     AddRentComponent,
@@ -87,6 +87,7 @@ const routes: Routes = [
     HomeComponent,
     SettingComponent,
     LibrarianListComponent,
+    StuLibraryCardComponent,
   ],
     imports: [
         BrowserModule,

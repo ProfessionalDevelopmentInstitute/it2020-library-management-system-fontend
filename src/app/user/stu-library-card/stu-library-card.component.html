@@ -10,8 +10,10 @@
 <body>
 <div class="container mt-2">
   <div class="card card-body shadow">
+    <div class="alert alert-success" *ngIf="message" [ngClass]="message" >
+      {{message}}
+    </div>
     <div class="row">
-      <!--      <div class="col-sm-1"></div>-->
       <div class="col-lg-4">
         <div class="card card-body">
           <strong class="text-center text-lg">Add Library Card</strong>
@@ -43,59 +45,59 @@
         </div>
       </div>
       <div class="col-lg-8">
-          <div class="card card-body">
-            <div >
-              <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Library Card</a>
-              <form [formGroup]="addLForm" (ngSubmit)="SearchByRollNo()" class="float-right">
-                <input type="text" class="small sm" placeholder="Search By RollNo" formControlName="rollNo">&nbsp;
-                <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
-              </form>
-            </div>
-            <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
-              <table class="display table table-striped table-bordered table-hover" style="width:100%">
-                <thead class="bg-warning text-indigo">
-                <tr>
-                  <th class="text-center">ID</th>
-                  <!--          <th>categoryId</th>-->
-                  <th class="text-center">Student Name</th>
-                  <th class="text-center">Roll Number</th>
-                  <th class="text-center">Year</th>
+        <div class="card card-body">
+          <div >
+            <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Library Card</a>
+            <form [formGroup]="addLForm" (ngSubmit)="SearchByRollNo()" class="float-right">
+              <input type="text" class="small sm" placeholder="Search By RollNo" formControlName="rollNo">&nbsp;
+              <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
+            </form>
+          </div>
+          <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
+            <table class="display table table-striped table-bordered table-hover" style="width:100%">
+              <thead class="bg-warning text-indigo">
+              <tr>
+                <th class="text-center">ID</th>
+                <!--          <th>categoryId</th>-->
+                <th class="text-center">Student Name</th>
+                <th class="text-center">Roll Number</th>
+                <th class="text-center">Year</th>
 
-                  <!--          <th class="text-center">IMG URl</th>-->
-                  <th class="text-center">Actions</th>
-                </tr>
-                </thead>
-                <tbody *ngFor="let c of result | paginate: {itemsPerPage: 10, currentPage : p}">
-                <tr>
-                  <td class="text-center">{{c.id}}</td>
-                  <!--          <td>{{b.categoryId}}</td>-->
-                  <td >{{c.name}}</td>
-                  <td >{{c.rollNo}}</td>
-                  <td class="text-center">{{c.year}}</td>
-                  <!--          <td>{{b.imgUrl}}</td>-->
-                  <td  class="text-center">
-                    <a class="btn btn-outline-success btn-sm" (click)="open(content, c)"><span><i class="fa fa-eye text-info"></i> </span></a> &nbsp; &nbsp;
-<!--                    <a class="btn btn-outline-primary btn-sm" (click)="onUpdate(update, c)"><span><i class="fa fa-edit text-success"></i></span></a> &nbsp; &nbsp;-->
-                    <a class="btn btn-outline-secondary btn-sm" (click)="onDelete(close, c.id)"><i class="fa fa-trash text-danger"></i></a>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-              <pagination-controls class="myPagination" (pageChange)="p = $event"></pagination-controls>
-            </div>
+                <!--          <th class="text-center">IMG URl</th>-->
+                <th class="text-center">Actions</th>
+              </tr>
+              </thead>
+              <tbody *ngFor="let c of result | paginate: {itemsPerPage: 10, currentPage : p}">
+              <tr>
+                <td class="text-center">{{c.id}}</td>
+                <!--          <td>{{b.categoryId}}</td>-->
+                <td >{{c.name}}</td>
+                <td >{{c.rollNo}}</td>
+                <td class="text-center">{{c.year}}</td>
+                <!--          <td>{{b.imgUrl}}</td>-->
+                <td  class="text-center">
+                  <a class="btn btn-outline-success btn-sm" (click)="open(content, c)"><span><i class="fa fa-eye text-info"></i> </span></a> &nbsp; &nbsp;
+                  <!--                    <a class="btn btn-outline-primary btn-sm" (click)="onUpdate(update, c)"><span><i class="fa fa-edit text-success"></i></span></a> &nbsp; &nbsp;-->
+                  <a class="btn btn-outline-secondary btn-sm" (click)="onDelete(close, c.id)"><i class="fa fa-trash text-danger"></i></a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <pagination-controls class="myPagination" (pageChange)="p = $event"></pagination-controls>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 <!--  detail model-->
 <ng-template #content let-modal >
-<!--  <div class="modal-header">-->
-<!--    <span class="text-indigo text-center"><h6 class="modal-title" id="modal-basic-title"><i class="fa fa-user-alt"></i> Student Info</h6></span>-->
-<!--    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">-->
-<!--      <span aria-hidden="true">&times;</span>-->
-<!--    </button>-->
-<!--  </div>-->
+  <!--  <div class="modal-header">-->
+  <!--    <span class="text-indigo text-center"><h6 class="modal-title" id="modal-basic-title"><i class="fa fa-user-alt"></i> Student Info</h6></span>-->
+  <!--    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">-->
+  <!--      <span aria-hidden="true">&times;</span>-->
+  <!--    </button>-->
+  <!--  </div>-->
   <div class="modal-body shadow">
     <div class="text-center form-group">
       <img src="http://localhost:8081/libMgmtSystem/file/get/{{logoUrl}}" class="img-circle">
@@ -116,7 +118,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fa fa-user"></i> </span>
           </div>
-        <input placeholder="Student Name" class="form-control" formControlName="name">
+          <input placeholder="Student Name" class="form-control" formControlName="name">
         </div>
         <div class="text-danger small" *ngIf="updateForm.controls.name.invalid">Student Name is required</div>
       </div>
@@ -125,7 +127,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fa fa-id-badge"></i> </span>
           </div>
-        <input type="text" placeholder="Roll Number" class="form-control" formControlName="rollNo">
+          <input type="text" placeholder="Roll Number" class="form-control" formControlName="rollNo">
         </div>
         <div class="text-danger small" *ngIf="updateForm.controls.rollNo.invalid">Roll Number is required</div>
       </div>
@@ -134,7 +136,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fa fa-calendar-check"></i> </span>
           </div>
-        <input type="text" placeholder="year" class="form-control" formControlName="year">
+          <input type="text" placeholder="year" class="form-control" formControlName="year">
         </div>
         <div class="text-danger small" *ngIf="updateForm.controls.year.invalid">Year is required</div>
       </div>
@@ -143,7 +145,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fa fa-image"></i> </span>
           </div>
-        <input type="text" placeholder="School Logo" class="form-control" formControlName="logoUrl">
+          <input type="text" placeholder="School Logo" class="form-control" formControlName="logoUrl">
         </div>
         <div class="text-danger small" *ngIf="updateForm.controls.logoUrl.invalid">School Logo is required</div>
       </div>
@@ -157,9 +159,9 @@
       </div>
     </form>
   </div>
-<!--  <div class="modal-footer">-->
-<!--    -->
-<!--  </div>-->
+  <!--  <div class="modal-footer">-->
+  <!--    -->
+  <!--  </div>-->
 </ng-template>
 <!--  end modal-->
 <!--  delete model-->

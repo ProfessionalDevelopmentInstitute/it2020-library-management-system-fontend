@@ -6,16 +6,48 @@
     <div class="image">
       <img src="assets/img/ucst.jpg" class="img-circle elevation-2">
     </div>
-    <h6 class="text-warning sm shadow">Library Management System</h6>
+    <h6 class="text-warning sm shadow mt-2">Library Management System</h6>
   </div>
 
   <!-- Sidebar -->
-  <div class="sidebar mt-2" >
+  <div class="sidebar mt-3" >
+    <nav *ngIf="authModel.isAuthenticated && authModel.isSt">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+          <a routerLink="/dashboard/book/category" class="nav-link">
+            <i class="fa fa-list nav-icon "></i>
+            <strong >Book Category</strong>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/dashboard/home" class="nav-link">
+            <i class="fa fa-list-alt nav-icon "></i>
+            <strong >Book Lists</strong>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="#" class="nav-link">
+            <i class="fa fa-file-pdf nav-icon "></i>
+            <strong >OQ pdf</strong>
+          </a>
+        </li>
+        <li class="nav-item has-treeview">
+          <hr class="table-bordered">
+          <a routerLink="/dashboard/about" class="nav-link ">
+            <i class="nav-icon fa fa-users"></i>
+            <strong>
+              About
+            </strong>
+          </a>
+        </li>
+      </ul>
+    </nav>
     <nav *ngIf="authModel.isAuthenticated && authModel.isLib">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
         <li class="nav-item has-treeview menu-open small">
+
 
         <li  class="nav-item has-treeview">
           <a  class="nav-link ">
@@ -90,7 +122,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a routerLink="/dashboard/add/library/card" class="nav-link">
+              <a routerLink="/dashboard/student/library/card" class="nav-link">
                 <i class="fa fa-plus-circle nav-icon text-warning"></i>
                 <p class="small text-warning">Add Student LibraryCard</p>
               </a>
