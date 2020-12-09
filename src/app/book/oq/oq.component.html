@@ -7,7 +7,6 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <script src="category-list.component.ts"></script>
 </head>
 <body>
 <div class="container">
@@ -18,19 +17,27 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card card-body">
-        <strong class="text-center text-lg">Add New Category</strong>
+        <strong class="text-center text-lg">Add New OldQ PDF</strong>
         <form class="mt-3" [formGroup]="addForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label class="small"><i class="fa fa-list-alt text-indigo"></i> Category Type</label>
-            <input type="text" class="form-control" formControlName="type">
-            <div class="text-danger small" *ngIf="addForm.controls.type.invalid">Category Type is required</div>
-
+            <label class="small"><i class="fa fa-book-open text-indigo"></i> Subject Name</label>
+            <input type="text" class="form-control" formControlName="subject">
+            <div class="text-danger small" *ngIf="addForm.controls.subject.invalid">Subject Name  is required</div>
           </div>
           <div class="form-group">
-            <label class="small"><i class="fa fa-pager text-indigo"></i> Description</label>
-            <textarea class="form-control" formControlName="description"></textarea>
-            <div class="text-danger small" *ngIf="addForm.controls.description.invalid">Description is required</div>
-
+            <label class="small"><i class="fa fa-calendar text-indigo"></i> Year</label>
+            <input type="text" class="form-control" formControlName="year">
+            <div class="text-danger small" *ngIf="addForm.controls.year.invalid">Year  is required</div>
+          </div>
+          <div class="form-group">
+            <label class="small"><i class="fa fa-calendar-times text-indigo"></i> Posted Date</label>
+            <input type="text" class="form-control" formControlName="postedDate">
+            <div class="text-danger small" *ngIf="addForm.controls.postedDate.invalid">Posted Date is required</div>
+          </div>
+          <div class="form-group">
+            <label class="small"><i class="fa fa-file-pdf text-indigo"></i> Pdf File</label>
+            <textarea class="form-control" formControlName="pdfUrl"></textarea>
+            <div class="text-danger small" *ngIf="addForm.controls.pdfUrl.invalid">Pdf File is required</div>
           </div>
           <div class="form-group ">
             <button [disabled]="addForm.invalid" type="submit" class="btn btn-outline-dark form-control"><strong>Add</strong></button>
@@ -40,29 +47,31 @@
     </div>
     <div class="col-sm-8">
       <div class="card card-body">
-        <div >
-          <form [formGroup]="updateForm" (ngSubmit)="SearchTyp()" class="float-right">
-            <input type="text" class="small sm" placeholder="Search By Type" formControlName="type">&nbsp;
-            <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
-          </form>
-        </div>
+        <!--        <div >-->
+        <!--          <form [formGroup]="updateForm" (ngSubmit)="SearchTyp()" class="float-right">-->
+        <!--            <input type="text" class="small sm" placeholder="Search By Type" formControlName="type">&nbsp;-->
+        <!--            <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>-->
+        <!--          </form>-->
+        <!--        </div>-->
         <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
           <table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">
             <thead class="bg-warning text-indigo">
             <tr>
-              <th class="text-center">ID</th>
-              <th class="text-center">Type</th>
-              <th class="text-center">Description</th>
+              <th class="text-center">Subject Name</th>
+              <th class="text-center">Year</th>
+              <th class="text-center">Posted Date</th>
+              <th class="text-center">Pdf File</th>
               <th class="text-center">Actions</th>
             </tr>
             </thead>
-            <tbody *ngFor="let c of category | paginate: {itemsPerPage: 10, currentPage : p}">
+            <tbody *ngFor="let c of result | paginate: {itemsPerPage: 10, currentPage : p}">
             <tr>
-              <td class="text-center">{{c.id}}</td>
-              <td class="text-center">{{c.type}}</td>
-              <td class="text-center">{{c.description}}</td>
+              <td class="text-center">{{c.subject}}</td>
+              <td class="text-center">{{c.year}}</td>
+              <td class="text-center">{{c.postedDate}}</td>
+              <td class="text-center">{{c.pdfUrl}}</td>
               <td  class="text-center">
-<!--                <a class="btn btn-outline-success btn-sm" ><span><i class="fa fa-eye text-info"></i> </span></a> &nbsp; &nbsp;-->
+                <!--                <a class="btn btn-outline-success btn-sm" ><span><i class="fa fa-eye text-info"></i> </span></a> &nbsp; &nbsp;-->
                 <a class="btn btn-outline-primary btn-sm" (click)="onUpdate(update, c)"><span><i class="fa fa-edit text-success"></i></span></a> &nbsp; &nbsp;
                 <a class="btn btn-outline-secondary btn-sm" (click)="onDelete(close, c.id)"><i class="fa fa-trash text-danger"></i></a>
               </td>
@@ -82,7 +91,7 @@
     <button type="button" class="close text-danger btn btn-lg" data-dismiss="alert">&times;</button>
   </div>
   <div class="modal-header">
-    <span class="text-center text-warning"><h5 class="modal-title" id="deleteModal">Delete Book</h5></span>
+    <span class="text-center text-warning"><h5 class="modal-title" id="deleteModal">Delete OQ Pdf</h5></span>
   </div>
   <div class="modal-body">
     <strong class="text-danger"><i class="fa fa-angry fa-2x"></i> Are You Sure Delete?</strong>
@@ -91,7 +100,7 @@
     <button type="button" class="btn btn-outline-success btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">
       close
     </button>
-    <button type="submit" class="btn btn-outline-danger" (click)="DeleteCategory()"><i class="fa fa-trash"></i></button>
+    <button type="submit" class="btn btn-outline-danger" (click)="DeleteOq()"><i class="fa fa-trash"></i></button>
     <!--      (click)="modal.close('Save click')"-->
   </div>
 </ng-template>
@@ -108,26 +117,34 @@
     <button type="button" class="close text-danger btn btn-lg" data-dismiss="alert">&times;</button>
   </div>
   <div class="modal-body shadow">
-    <h5 class="text-center">Update Category</h5>
+    <h5 class="text-center">Update OQ PDF</h5>
     <form class="mt-3 " [formGroup]="updateForm">
       <div class="form-group">
-        <label class="small"><i class="fa fa-list-alt text-indigo"></i> Category Type</label>
-        <input type="text" class="form-control" formControlName="type">
-        <div class="text-danger small" *ngIf="updateForm.controls.type.invalid">Category Type is required</div>
-
+        <label class="small"><i class="fa fa-book-open text-indigo"></i> Subject Name</label>
+        <input type="text" class="form-control" formControlName="subject">
+        <div class="text-danger small" *ngIf="updateForm.controls.subject.invalid">Subject Name is required</div>
       </div>
       <div class="form-group">
-        <label class="small"><i class="fa fa-pager text-indigo"></i> Description</label>
-        <textarea class="form-control" formControlName="description"></textarea>
-        <div class="text-danger small" *ngIf="updateForm.controls.description.invalid">Description is required</div>
-
+        <label class="small"><i class="fa fa-calendar text-indigo"></i> Year</label>
+        <input type="text" class="form-control" formControlName="year">
+        <div class="text-danger small" *ngIf="updateForm.controls.year.invalid">Year  is required</div>
+      </div>
+      <div class="form-group">
+        <label class="small"><i class="fa fa-calendar-times text-indigo"></i> Posted Date</label>
+        <input type="text" class="form-control" formControlName="postedDate">
+        <div class="text-danger small" *ngIf="updateForm.controls.postedDate.invalid">Posted Date is required</div>
+      </div>
+      <div class="form-group">
+        <label class="small"><i class="fa fa-file-pdf text-indigo"></i> Pdf File</label>
+        <textarea class="form-control" formControlName="pdfUrl"></textarea>
+        <div class="text-danger small" *ngIf="updateForm.controls.pdfUrl.invalid">Pdf File is required</div>
       </div>
       <hr>
       <div class="form-group text-center">
         <button type="button" class="btn btn-outline-danger btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">
           close
         </button> &nbsp;
-        <button [disabled]="updateForm.invalid" type="submit" class="btn btn-outline-success" (click)="UpdateLibCard()">Update</button>
+        <button [disabled]="updateForm.invalid" type="submit" class="btn btn-outline-success" (click)="UpdateOq()">Update</button>
         <!--      (click)="modal.close('Save click')"-->
       </div>
     </form>

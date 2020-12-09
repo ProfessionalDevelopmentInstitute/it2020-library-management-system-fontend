@@ -38,6 +38,8 @@ export class StudentListComponent implements OnInit {
   inputForm: FormGroup;
   p: Number = 1;
   count: Number = 5;
+  dMessage: string;
+  uMessage: string;
   constructor(private studentService: StudentService, private modalService: NgbModal ,
               private validatorService: ValidatorService, private credentialService: CredentialService) {
     this.updateStudForm = new FormGroup({
@@ -84,6 +86,10 @@ export class StudentListComponent implements OnInit {
   DeleteStud(): void{
     this.studentService.deleteStudent(this.idToDelete).subscribe(
       value => {
+        setTimeout(() => {
+          this.dMessage = value.message;
+
+        }, 10);
         console.log(value)
       }
     );
@@ -116,7 +122,9 @@ export class StudentListComponent implements OnInit {
     this.updateResult=up;
     this.studentService.updateStudent(this.updateResult).subscribe(
       value => {
-        value=this.updateResult;
+        setTimeout(() => {
+          this.uMessage = value.message;
+        }, 10);
         console.log(value);
       },
       error => {console.log(error.message)}

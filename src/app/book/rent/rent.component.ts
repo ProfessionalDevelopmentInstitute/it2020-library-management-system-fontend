@@ -27,6 +27,8 @@ export class RentComponent implements OnInit {
   Status = STATUS;
   p: Number = 1;
   count: Number = 10;
+  dMessage: string;
+  uMessage: string;
   constructor(private rentService: RentService, private modalService: NgbModal, private bookService: ListService) {
     this.addRForm = new FormGroup({
       rentFromDate: new FormControl('', Validators.required),
@@ -77,6 +79,9 @@ export class RentComponent implements OnInit {
     this.updateResult=up;
     this.rentService.updateRent(this.updateResult).subscribe(
       value => {
+        setTimeout(() => {
+          this.uMessage = value.message;
+        }, 10);
         console.log(value);
       },
       error => {console.log(error)},
@@ -101,6 +106,9 @@ export class RentComponent implements OnInit {
     this.rentService.deleteRent(this.idToDelete)
       .subscribe(
         value => {
+          setTimeout(() => {
+            this.dMessage = value.message;
+          }, 10);
           console.log(value);
         },
         error => console.log(error));

@@ -10,9 +10,17 @@
 <body>
 <div class="container mt-2">
   <div class="card card-body shadow">
-    <div class="alert alert-success" *ngIf="message" [ngClass]="message" >
-      {{message}}
-    </div>
+
+      <div class="alert alert-default-secondary" *ngIf="message" [ngClass]="message" >
+        Create <strong>{{message}}</strong>
+        <button type="button" class="close text-danger btn btn-lg" data-dismiss="alert">&times;</button>
+      </div>
+
+<!--      <div class="alert alert-danger" *ngIf="failMes" [ngClass]="failMes" >-->
+<!--        <span>{{failMes}}</span>-->
+<!--        <button type="button" class="close text-warning btn btn-lg" data-dismiss="alert">&times;</button>-->
+<!--      </div>-->
+
     <div class="row">
       <div class="col-lg-4">
         <div class="card card-body">
@@ -47,7 +55,6 @@
       <div class="col-lg-8">
         <div class="card card-body">
           <div >
-            <a class="text-warning" routerLink="/add/new/items"><i class="fa fa-plus-circle"></i> Add New Library Card</a>
             <form [formGroup]="addLForm" (ngSubmit)="SearchByRollNo()" class="float-right">
               <input type="text" class="small sm" placeholder="Search By RollNo" formControlName="rollNo">&nbsp;
               <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
@@ -98,6 +105,12 @@
   <!--      <span aria-hidden="true">&times;</span>-->
   <!--    </button>-->
   <!--  </div>-->
+
+    <div class="alert alert-default-primary" *ngIf="UpdMessage" [ngClass]="UpdMessage" >
+      Update <strong>{{UpdMessage}}</strong>
+      <button type="button" class="close text-danger btn btn-lg" data-dismiss="alert">&times;</button>
+    </div>
+
   <div class="modal-body shadow">
     <div class="text-center form-group">
       <img src="http://localhost:8081/libMgmtSystem/file/get/{{logoUrl}}" class="img-circle">
@@ -166,11 +179,15 @@
 <!--  end modal-->
 <!--  delete model-->
 <ng-template #close let-modal class="modal-sm fade">
+  <div class="alert alert-default-primary" *ngIf="dMessage" [ngClass]="dMessage" >
+    Delete <strong>{{dMessage}}</strong>
+    <button type="button" class="close text-danger btn btn-lg" data-dismiss="alert">&times;</button>
+  </div>
   <div class="modal-header">
     <span class="text-center text-warning"><h5 class="modal-title" id="deleteModal">Delete Book</h5></span>
   </div>
   <div class="modal-body">
-    <strong class="text-danger"> Are You Sure Delete?</strong>
+    <strong class="text-danger"><i class="fa fa-angry"></i> Are You Sure Delete?</strong>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-success btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">

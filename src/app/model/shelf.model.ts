@@ -1,4 +1,4 @@
 export interface Shelf {
-  id?: number;
+  id: number;
   room: string;
 }

@@ -8,5 +8,5 @@ export class LibrarianModel{
   password: string;
   role: string;
 }
-export const ROLE: string[] = ['ADMIN'];
+export const ROLES: string[] = ['ADMIN'];
 export const POSITION: string[] = ['Teacher', 'Clerk']

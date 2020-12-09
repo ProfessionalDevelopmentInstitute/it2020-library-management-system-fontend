@@ -19,6 +19,7 @@ export class AddItemComponent implements OnInit {
   addBookForm: FormGroup;
   result: BookCategory[];
   shelf: Shelf[];
+  message: string;
   constructor(private cateService: CategoryService, private router: Router,
               private shelfService: ShelfService, private listService: ListService) {
 
@@ -48,7 +49,6 @@ export class AddItemComponent implements OnInit {
       }
     );
   }
-
   onSubmitt(): void{
     const addBook: BookModel = {
       name: this.addBookForm.value.name,
@@ -63,6 +63,7 @@ export class AddItemComponent implements OnInit {
     this.listService.createBook(addBook).subscribe(
       value => {
         console.log(value);
+        this.message =value.message;
       },
       error => {
         console.log(error)

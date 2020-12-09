@@ -33,7 +33,8 @@ export class ListsComponent implements OnInit {
   count: Number = 10;
   updateForm: FormGroup;
   searchForm: FormGroup;
-
+  message: string;
+  dMessage: string;
   constructor(public bookService: ListService, private modalService: NgbModal,
               private categoryService: CategoryService, private shelfService: ShelfService) {
     this.updateForm = new FormGroup({
@@ -84,23 +85,22 @@ export class ListsComponent implements OnInit {
     );
   }
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
+  // open(content) {
+  //   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+  //     this.closeResult = `Closed with: ${result}`;
+  //   }, (reason) => {
+  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //   });
+  // }
 
   DeleteBook(){
     this.bookService.deleteBook(this.idToDelete)
       .subscribe(
         value => {
           console.log(value);
-          this.bookService.getBooks().subscribe(value =>{
-            this.books =value.result;
-            console.log(value.message)
-          })
+          setTimeout(() => {
+            this.dMessage = value.message;
+          }, 10);
         },
         error => console.log(error));
     console.log(this.idToDelete);
@@ -132,7 +132,9 @@ export class ListsComponent implements OnInit {
     this.updateResult=up;
     this.bookService.updateBook(this.updateResult).subscribe(
       value => {
-        value=this.updateResult;
+        setTimeout(() => {
+          this.message = value.message;
+        }, 10);
         console.log(value);
       },
       error => {console.log(error)}

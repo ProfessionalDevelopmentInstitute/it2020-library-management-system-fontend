@@ -23,6 +23,9 @@ export class CategoryListComponent implements OnInit {
   category: BookCategory[];
   p: Number = 1;
   count: Number = 10;
+  message: string;
+  dMessage: string;
+  uMessage: string;
   constructor(private cateService: CategoryService, private categoryService: CategoryService,
               private router: Router, private modalService: NgbModal,) {
     this.addForm = new FormGroup({
@@ -59,6 +62,10 @@ export class CategoryListComponent implements OnInit {
     console.log(add);
     this.cateService.createBookCategory(add).subscribe(
       value => {
+        setTimeout(() => {
+          this.message = value.message;
+
+        }, 10);
         console.log(value);
       }
     );
@@ -68,6 +75,10 @@ export class CategoryListComponent implements OnInit {
     this.categoryService.deleteCategory(this.idToDelete)
       .subscribe(
         value => {
+          setTimeout(() => {
+            this.dMessage = value.message;
+
+          }, 10);
           console.log(value);
         },
         error => console.log(error));
@@ -94,6 +105,10 @@ export class CategoryListComponent implements OnInit {
     this.updateResult=up;
     this.categoryService.updateCategories(this.updateResult).subscribe(
       value => {
+        setTimeout(() => {
+          this.uMessage = value.message;
+
+        }, 10);
         console.log(value);
       },
       error => {console.log(error)},

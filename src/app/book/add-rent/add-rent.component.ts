@@ -14,6 +14,7 @@ export class AddRentComponent implements OnInit {
 
   Status = STATUS;
   addRentForm: FormGroup;
+  message: string;
   constructor(private router: Router, private rentService: RentService) {
     this.addRentForm = new FormGroup({
       rentFromDate: new FormControl('', Validators.required),
@@ -44,6 +45,9 @@ export class AddRentComponent implements OnInit {
     console.log(rent);
     this.rentService.createRentList(rent).subscribe(
       value => {
+        setTimeout(() => {
+          this.message = value.message;
+        }, 10);
         console.log(value);
       },
       error => {

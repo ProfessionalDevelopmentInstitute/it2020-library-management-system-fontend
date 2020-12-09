@@ -33,7 +33,7 @@
         </tr>
         </thead>
         <tbody >
-        <tr *ngFor="let s of student | paginate: {itemsPerPage: 5, currentPage : p}">
+        <tr *ngFor="let s of student | paginate: {itemsPerPage: 10, currentPage : p}">
           <td class="text-center">{{s.id}}</td>
 <!--          <td></td>-->
           <td class="text-center">{{s.name}}</td>
@@ -83,11 +83,15 @@
 <!--  end modal-->
 <!--  delete model-->
 <ng-template #close let-modal class="modal-sm fade">
+  <div class="alert alert-default-primary" *ngIf="dMessage" [ngClass]="dMessage" >
+    Delete <strong>{{dMessage}}</strong>
+    <button type="button" class="close text-danger btn btn-lg" data-dismiss="alert">&times;</button>
+  </div>
   <div class="modal-header">
     <span class="text-center text-warning"><h5 class="modal-title" id="deleteModal">Delete Book</h5></span>
   </div>
   <div class="modal-body">
-    <strong class="text-danger"> Are You Sure Delete?</strong>
+    <strong class="text-danger"><i class="fa fa-angry"></i> Are You Sure Delete?</strong>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-success btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -100,6 +104,10 @@
 <!--  end modal-->
 <!--  edit model-->
 <ng-template #update let-modal class="modal fade">
+  <div class="alert alert-default-primary" *ngIf="uMessage" [ngClass]="uMessage" >
+    Update <strong>{{uMessage}}</strong>
+    <button type="button" class="close text-danger btn btn-lg" data-dismiss="alert">&times;</button>
+  </div>
   <div class="modal-header">
     <span class="text-warning"><h5 class="modal-title text-center" id="updateModal">Update Student Info</h5></span>
   </div>

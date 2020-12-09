@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LibraryCardService} from '../../service/library-card.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
+import {getMilliseconds} from 'ngx-bootstrap/chronos/utils/date-getters';
 
 @Component({
   selector: 'app-stu-library-card',
@@ -12,6 +13,8 @@ import {Router} from '@angular/router';
 })
 export class StuLibraryCardComponent implements OnInit {
 
+  isValid: boolean;
+  inValid: boolean;
   closeResult: string;
   idToDelete: number;
   idToUpdate: number;
@@ -29,9 +32,13 @@ export class StuLibraryCardComponent implements OnInit {
   // items = [];
   // pageOfItems: Array<any>;
   message: string;
+  UpdMessage: string;
+  dMessage: string;
+  failMes: string;
   size: number;
   pageNumber: number;
   p: Number = 1;
+
   // count: Number = 5;
   constructor(private libraryCService: LibraryCardService, private modalService: NgbModal, private router: Router) {
 
@@ -79,12 +86,15 @@ export class StuLibraryCardComponent implements OnInit {
     console.log(addLCard);
     this.libraryCService.createLibraryCard(addLCard).subscribe(
       value => {
-        // this.message = value.message;
         setTimeout(() => {
-          this.message = value.message
-          alert(value.message);
-        }, 3000);
-        console.log(value);
+          this.message = value.message;
+          // this.failMes = "Update Fail!!!!!!!!!!!!!!!!!!";
+          // alert(value.message);
+        }, 10);
+        console.log(value)
+      },
+      error => {
+        console.log(error);
       }
     );
     this.router.navigate(['/dashboard/student/library/card'])
@@ -93,6 +103,9 @@ export class StuLibraryCardComponent implements OnInit {
     this.libraryCService.deleteLibCard(this.idToDelete)
       .subscribe(
         value => {
+          setTimeout(() => {
+            this.dMessage = value.message;
+          }, 10);
           console.log(value);
         },
         error => console.log(error));
@@ -121,6 +134,10 @@ export class StuLibraryCardComponent implements OnInit {
     this.updateResult=up;
     this.libraryCService.updateLibCard(this.updateResult).subscribe(
       value => {
+        setTimeout(() => {
+          this.UpdMessage = value.message;
+
+        }, 10);
         console.log(value);
       },
       error => {console.log(error)},

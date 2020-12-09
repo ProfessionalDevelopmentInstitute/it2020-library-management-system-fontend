@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import {CategoryService} from '../../service/category.service';
 import {Shelf} from '../../model/shelf.model';
-import {ShelfService} from '../../service/shelf.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {BookCategory} from '../../model/category.model';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ShelfService} from '../../service/shelf.service';
 import {Router} from '@angular/router';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {BookCategory} from '../../model/category.model';
+import {OldQService} from '../../service/old-q.service';
+import {OqModel} from '../../model/oq.model';
 
 @Component({
-  selector: 'app-shelf-one',
-  templateUrl: './shelf-one.component.html',
-  styleUrls: ['./shelf-one.component.css']
+  selector: 'app-oq',
+  templateUrl: './oq.component.html',
+  styleUrls: ['./oq.component.css']
 })
-export class ShelfOneComponent implements OnInit {
-
-  result: Shelf[];
+export class OqComponent implements OnInit {
+  result: OqModel[];
   p: Number = 1;
   addForm: FormGroup;
   updateForm: FormGroup;
@@ -22,35 +22,41 @@ export class ShelfOneComponent implements OnInit {
   updateResult: any;
   closeResult: string;
   idToDelete: number;
-  idToUpdate: number;
+  idToUpd: number;
   message: string;
   dMessage: string;
   uMessage: string;
-  constructor(private shelfService: ShelfService, private router: Router, private modalService: NgbModal) {
+  constructor(private oldService: OldQService, private router: Router, private modalService: NgbModal) {
     this.addForm = new FormGroup({
-      id: new FormControl('', Validators.required),
-      room: new FormControl('', Validators.required)
+      subject: new FormControl('', Validators.required),
+      pdfUrl: new FormControl('', Validators.required),
+      year: new FormControl('', Validators.required),
+      postedDate: new FormControl('', Validators.required)
     });
     this.updateForm = new FormGroup({
-      id: new FormControl('', Validators.required),
-      room: new FormControl('', Validators.required),
+      subject: new FormControl('', Validators.required),
+      pdfUrl: new FormControl('', Validators.required),
+      year: new FormControl('', Validators.required),
+      postedDate: new FormControl('', Validators.required)
     });
   }
 
   ngOnInit(): void {
-    this.shelfService.getShelves().subscribe(
+    this.oldService.getOQs().subscribe(
       value => {
         this.result = value.result;
       }
     );
   }
   onSubmit(): void{
-    const add: Shelf = {
-      id: this.addForm.value.id,
-      room: this.addForm.value.room
+    const add: OqModel = {
+      subject: this.addForm.value.subject,
+      pdfUrl: this.addForm.value.pdfUrl,
+      year: this.addForm.value.year,
+      postedDate: this.addForm.value.postedDate
     };
     console.log(add);
-    this.shelfService.createShelf(add).subscribe(
+    this.oldService.createOQ(add).subscribe(
       value => {
         setTimeout(() => {
           this.message = value.message;
@@ -58,10 +64,10 @@ export class ShelfOneComponent implements OnInit {
         console.log(value);
       }
     );
-    this.router.navigate(['/dashboard/shelf/list'])
+    this.router.navigate(['/dashboard/old/q'])
   }
-  DeleteShelf(){
-    this.shelfService.deleteShelf(this.idToDelete)
+  DeleteOq(){
+    this.oldService.deleteOQ(this.idToDelete)
       .subscribe(
         value => {
           setTimeout(() => {
@@ -83,40 +89,42 @@ export class ShelfOneComponent implements OnInit {
     });
   }
 
-  UpdateShelf(): void {
-    const up: Shelf = {
-      id: this.idToUpdate,
-      room: this.updateForm.value.room,
+  UpdateOq(): void {
+    const up: OqModel = {
+      id: this.idToUpd,
+      subject: this.updateForm.value.subject,
+      pdfUrl: this.updateForm.value.pdfUrl,
+      year: this.updateForm.value.year,
+      postedDate: this.updateForm.value.postedDate
     }
     this.res=up;
-    console.log(this.idToUpdate);
+    console.log(this.idToUpd);
     this.updateResult=up;
-    this.shelfService.updateShelf(this.updateResult).subscribe(
+    console.log(up)
+    this.oldService.updateOQ(this.updateResult).subscribe(
       value => {
         setTimeout(() => {
           this.uMessage = value.message;
 
         }, 10);
-        console.log(value);
+        console.log(value.result);
       },
       error => {console.log(error)},
       ()=>{console.log("Success!")}
     );
   }
 
-  onUpdate(update, upd: Shelf) {
-    this.idToUpdate = upd.id;
+  onUpdate(update, upd: OqModel) {
+    this.idToUpd= upd.id;
     // this.category = cate.id;
     this.modalService.open(update, {ariaLabelledBy: 'updateModal'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-    console.log(this.idToUpdate);
-    // this.updateForm.reset(this.idToUpdate);
+    console.log(this.idToUpd);
     this.updateForm.reset(upd);
   }
-
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

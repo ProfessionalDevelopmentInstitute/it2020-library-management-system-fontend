@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {LibrarianService} from '../../service/librarian.service';
-import {LibrarianModel, POSITION} from '../../model/librarian.model';
+import {LibrarianModel, POSITION, ROLES} from '../../model/librarian.model';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ValidatorService} from '../../service/validator.service';
-import {ROLE, StudentModel} from '../../model/student.model';
 
 @Component({
   selector: 'app-librarian-list',
@@ -13,7 +12,7 @@ import {ROLE, StudentModel} from '../../model/student.model';
 })
 export class LibrarianListComponent implements OnInit {
 
-  Roles = ROLE;
+  Roles = ROLES;
   position = POSITION;
   res: any;
   updateResult: any;
@@ -24,6 +23,8 @@ export class LibrarianListComponent implements OnInit {
   updateLForm: FormGroup;
   p : Number = 1;
   count: Number = 5;
+  uMessage: string;
+  dMessage: string;
   constructor(private librarianService: LibrarianService, private modalService: NgbModal,
               private validatorService: ValidatorService) {
     this.updateLForm = new FormGroup({
@@ -33,10 +34,7 @@ export class LibrarianListComponent implements OnInit {
       address: new FormControl('', [Validators.required]),
       position: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
-      passwords: new FormGroup({
-        password: new FormControl(null),
-        confirmPassword: new FormControl(null)
-      }, [Validators.required, this.validatorService.confirmPasswordValidator]),
+      password: new FormControl('', Validators.required)
     });
   }
   SearchByName(): void{
@@ -64,7 +62,7 @@ export class LibrarianListComponent implements OnInit {
       email: this.updateLForm.value.email,
       address: this.updateLForm.value.address,
       phone: this.updateLForm.value.phone,
-      password: this.updateLForm.value.passwords.password,
+      password: this.updateLForm.value.password,
       position: this.updateLForm.value.position,
       role: this.updateLForm.value.role
     }
@@ -73,7 +71,9 @@ export class LibrarianListComponent implements OnInit {
     this.updateResult=up;
     this.librarianService.updateLibrarian(this.updateResult).subscribe(
       value => {
-        value=this.updateResult;
+        setTimeout(() => {
+          this.uMessage = value.message;
+        }, 10);
         console.log(value);
       },
       error => {console.log(error.message)}
@@ -96,6 +96,9 @@ export class LibrarianListComponent implements OnInit {
   DeleteLib(): void{
     this.librarianService.deleteLibrarian(this.idToDelete).subscribe(
       value => {
+        setTimeout(() => {
+          this.dMessage = value.message;
+        }, 10);
         console.log(value)
       }
     );

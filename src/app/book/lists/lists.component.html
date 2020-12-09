@@ -33,7 +33,7 @@
           <th class="text-center">Actions</th>
         </tr>
         </thead>
-        <tbody *ngFor="let b of resData | paginate:{itemsPerPage: 5, currentPage : p}">
+        <tbody *ngFor="let b of resData | paginate:{itemsPerPage: 10, currentPage : p}">
         <tr>
           <td class="text-center">{{b.shelves.id}}</td>
           <td class="text-center">{{b.categories.id}}</td>
@@ -45,7 +45,7 @@
 
 <!--          <td>{{b.imgUrl}}</td>-->
           <td  class="text-center">
-            <a class="btn btn-outline-success btn-sm" (click)="open(content)"><span><i class="fa fa-eye text-info"></i> </span></a> &nbsp; &nbsp;
+<!--            <a class="btn btn-outline-success btn-sm" (click)="open(content)"><span><i class="fa fa-eye text-info"></i> </span></a> &nbsp; &nbsp;-->
             <a class="btn btn-outline-primary btn-sm" (click)="onUpdate(update, b)"><span><i class="fa fa-edit text-success"></i></span></a> &nbsp; &nbsp;
             <a class="btn btn-outline-secondary btn-sm" (click)="onDelete(close, b.id)"><i class="fa fa-trash text-danger"></i></a>
           </td>
@@ -58,35 +58,39 @@
 </div>
 
 <!--  detail model-->
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <span class="text-warning"><h5 class="modal-title" id="modal-basic-title">Details Book Info</h5></span>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div class="form-group">
-        <label for="firstname">Firstname</label>
-        <div class="input-group">
-          <input id="firstname" class="form-control" >
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-  </div>
-</ng-template>
+<!--<ng-template #content let-modal>-->
+<!--  <div class="modal-header">-->
+<!--    <span class="text-warning"><h5 class="modal-title" id="modal-basic-title">Details Book Info</h5></span>-->
+<!--    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">-->
+<!--      <span aria-hidden="true">&times;</span>-->
+<!--    </button>-->
+<!--  </div>-->
+<!--  <div class="modal-body">-->
+<!--    <form>-->
+<!--      <div class="form-group">-->
+<!--        <label for="firstname">Firstname</label>-->
+<!--        <div class="input-group">-->
+<!--          <input id="firstname" class="form-control" >-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--  <div class="modal-footer">-->
+<!--    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>-->
+<!--  </div>-->
+<!--</ng-template>-->
 <!--  end modal-->
 <!--  delete model-->
 <ng-template #close let-modal class="modal-sm fade">
+  <div class="alert alert-default-secondary" *ngIf="dMessage" [ngClass]="dMessage" >
+    Book delete <strong>{{dMessage}}</strong>
+    <button type="button" class="close text-danger btn btn-lg" data-dismiss="alert">&times;</button>
+  </div>
   <div class="modal-header">
     <span class="text-center text-warning"><h5 class="modal-title" id="deleteModal">Delete Book</h5></span>
   </div>
   <div class="modal-body">
-    <strong class="text-danger"> Are You Sure Delete?</strong>
+    <strong class="text-danger"><i class="fa fa-angry fa-2x"></i> Are You Sure Delete?</strong>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-success btn-sm" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -99,6 +103,10 @@
 <!--  end modal-->
 <!--  delete model-->
 <ng-template #update let-modal class="modal fade">
+  <div class="alert alert-default-secondary" *ngIf="message" [ngClass]="message" >
+    Book Update <strong>{{message}}</strong>
+    <button type="button" class="close text-danger btn btn-lg" data-dismiss="alert">&times;</button>
+  </div>
   <div class="modal-header">
     <span class="text-warning"><h5 class="modal-title text-center" id="updateModal">Update Book Info</h5></span>
   </div>

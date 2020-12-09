@@ -4,7 +4,7 @@ import {LibraryCardService} from '../../../service/library-card.service';
 import {ValidatorService} from '../../../service/validator.service';
 import {StudentService} from '../../../service/student.service';
 import {Router} from '@angular/router';
-import {LibrarianModel, POSITION, ROLE} from '../../../model/librarian.model';
+import {LibrarianModel, POSITION, ROLES} from '../../../model/librarian.model';
 import {LibrarianService} from '../../../service/librarian.service';
 
 @Component({
@@ -14,7 +14,7 @@ import {LibrarianService} from '../../../service/librarian.service';
 })
 export class LibrarianRegisterComponent implements OnInit {
 
-  Roles = ROLE;
+  Roles = ROLES;
   position= POSITION;
   registerForm: FormGroup;
   constructor(private libraryService: LibraryCardService, private validatorService: ValidatorService,

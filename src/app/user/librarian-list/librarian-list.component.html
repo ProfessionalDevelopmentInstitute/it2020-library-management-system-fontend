@@ -11,7 +11,7 @@
 <div class="container-fluid mt-2">
   <div class="card card-body">
     <div >
-      <a class="text-warning" routerLink="/add/new/rent"><i class="fa fa-plus-circle"></i> Add New Rent</a>
+<!--      <a class="text-warning" routerLink="/add/new/rent"><i class="fa fa-plus-circle"></i> Add New Rent</a>-->
       <form [formGroup]="updateLForm" (ngSubmit)="SearchByName()" class="float-right">
         <input type="text" class="small sm" placeholder="Search By Name" formControlName="name">&nbsp;
         <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
@@ -31,7 +31,7 @@
         </tr>
         </thead>
         <tbody >
-        <tr *ngFor="let s of librarian | paginate:{ itemsPerPage: 5, currentPage : p}">
+        <tr *ngFor="let s of librarian | paginate:{ itemsPerPage: 10, currentPage : p}">
           <td class="text-center">{{s.id}}</td>
           <!--          <td></td>-->
           <td class="text-center">{{s.name}}</td>
@@ -39,7 +39,6 @@
           <td class="text-center">{{s.phone}}</td>
           <td class="text-center">{{s.position}}</td>
           <td class="text-center">
-            <a class="btn btn-outline-success btn-sm" ><span><i class="fa fa-eye text-info"></i> </span></a> &nbsp; &nbsp;
             <a class="btn btn-outline-primary btn-sm" (click)="onUpdate(update, s)"><span><i class="fa fa-edit text-success"></i></span></a> &nbsp; &nbsp;
             <a class="btn btn-outline-secondary btn-sm" (click)="onDelete(close, s.id)"><i class="fa fa-trash text-danger"></i></a>
           </td>
@@ -51,6 +50,10 @@
   </div>
   <!--  delete model-->
   <ng-template #close let-modal class="modal-sm fade">
+    <div class="alert alert-default-primary" *ngIf="dMessage" [ngClass]="dMessage" >
+      Delete <strong>{{dMessage}}</strong>
+      <button type="button" class="close text-danger btn btn-lg" data-dismiss="alert">&times;</button>
+    </div>
     <div class="modal-header">
       <span class="text-center text-warning"><h5 class="modal-title" id="deleteModal">Delete Librarian</h5></span>
     </div>
@@ -68,6 +71,10 @@
   <!--  end modal-->
   <!--  delete model-->
   <ng-template #update let-modal class="modal fade">
+    <div class="alert alert-default-primary" *ngIf="uMessage" [ngClass]="uMessage" >
+      Update <strong>{{uMessage}}</strong>
+      <button type="button" class="close text-danger btn btn-lg" data-dismiss="alert">&times;</button>
+    </div>
     <div class="modal-header">
       <span class="text-warning"><h5 class="modal-title text-center" id="updateModal">Update Librarian Info</h5></span>
     </div>
@@ -132,26 +139,14 @@
           </div>
           <div class="text-danger small" *ngIf="updateLForm.controls.role.invalid">User Role is required</div>
         </div>
-        <div formGroupName="passwords">
-          <div class="form-group">
-            <div class="input-group flex-nowrap">
-              <div class="input-group-prepend">
-                <span class="input-group-text" ><i class="fa fa-lock"></i> </span>
-              </div>
-              <input type="password" class="form-control" placeholder="******" formControlName="password">
+        <div class="form-group">
+          <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+              <span class="input-group-text" ><i class="fa fa-lock"></i> </span>
             </div>
+            <input type="tel" class="form-control" placeholder="******" formControlName="password">
           </div>
-          <div class="form-group">
-            <div class="input-group flex-nowrap">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-lock"></i> </span>
-              </div>
-              <input type="password" class="form-control" placeholder="******" formControlName="confirmPassword">
-            </div>
-          </div>
-          <div class="text-danger" *ngIf="updateLForm.touched && updateLForm.controls.passwords.errors !== null && updateLForm.controls.passwords.errors.PasswordNotMergeError">
-            * password and confirm password must be same.
-          </div>
+          <div class="text-danger small" *ngIf="updateLForm.controls.password.invalid">Password is required</div>
         </div>
         <hr>
         <div class="form-group float-right">

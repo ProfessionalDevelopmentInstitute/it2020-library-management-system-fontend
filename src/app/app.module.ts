@@ -34,6 +34,7 @@ import { SettingComponent } from './dashboard/setting/setting.component';
 import { LibrarianListComponent } from './user/librarian-list/librarian-list.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { StuLibraryCardComponent } from './user/stu-library-card/stu-library-card.component';
+import { OqComponent } from './book/oq/oq.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: 'login', pathMatch: 'full' },
@@ -50,7 +51,8 @@ const routes: Routes = [
     {path: 'about', component: AboutComponent},
     {path: 'book/category', component: CategoryComponent},
     {path: 'book/list', component: ListsComponent},
-    {path: 'shelf/one', component: ShelfOneComponent},
+    {path: 'shelf/list', component: ShelfOneComponent},
+    {path: 'old/q', component: OqComponent},
     {path: 'shelves', component: ShelvesComponent},
     {path: 'add/new/items', component: AddItemComponent},
     {path: 'student/library/card', component: StuLibraryCardComponent},
@@ -88,6 +90,7 @@ const routes: Routes = [
     SettingComponent,
     LibrarianListComponent,
     StuLibraryCardComponent,
+    OqComponent,
   ],
     imports: [
         BrowserModule,
