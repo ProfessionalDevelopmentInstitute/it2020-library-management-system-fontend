@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.value.type === 'student'){
       this.loginManger.studentSignIn(login).subscribe(
         value => {
-          console.log(value)
+          console.log(value.email)
           this.router.navigate(['dashboard/home']);
         }
       );
@@ -40,13 +40,12 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.value.type === 'librarian'){
       this.loginManger.librarianSignIn(login).subscribe(
         value => {
-          console.log(value)
+          console.log(value.email)
           this.router.navigate(['dashboard/home']);
         }
       );
     }
-
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
 }
 
 }

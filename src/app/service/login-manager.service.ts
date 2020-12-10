@@ -14,9 +14,6 @@ export class LoginManagerService {
 
   isAuth: Subject<AuthModel> = new Subject<AuthModel>();
 
-  isLib: LibrarianModel;
-  isSt: StudentModel;
-
   studentModel: StudentModel;
   librarianModel: LibrarianModel;
   credential: string;

@@ -10,13 +10,13 @@
   <script src="category-list.component.ts"></script>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
   <div class="alert alert-default-primary" *ngIf="message" [ngClass]="message" >
     Create <strong>{{message}}</strong>
     <button type="button" class="close text-danger btn btn-lg" data-dismiss="alert">&times;</button>
   </div>
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
       <div class="card card-body">
         <strong class="text-center text-lg">Add New Category</strong>
         <form class="mt-3" [formGroup]="addForm" (ngSubmit)="onSubmit()">
@@ -38,12 +38,12 @@
         </form>
       </div>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-9">
       <div class="card card-body">
         <div >
           <form [formGroup]="updateForm" (ngSubmit)="SearchTyp()" class="float-right">
-            <input type="text" class="small sm" placeholder="Search By Type" formControlName="type">&nbsp;
-            <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
+            <input type="text" class="small sm" placeholder="Search By Type" formControlName="type">
+            <button class="text-gray-dark btn btn-sm " type="submit"><i class="fa fa-search"></i></button>
           </form>
         </div>
         <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
