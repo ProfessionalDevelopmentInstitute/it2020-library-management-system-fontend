@@ -23,7 +23,7 @@
         <tr>
           <th class="text-center">ID</th>
           <th class="text-center">Name</th>
-<!--                    <th class="text-center">Email</th>-->
+<!--          <th class="text-center">Email</th>-->
           <th class="text-center">Address</th>
           <th class="text-center">Phone</th>
           <th class="text-center">Position</th>
@@ -33,8 +33,8 @@
         <tbody >
         <tr *ngFor="let s of librarian | paginate:{ itemsPerPage: 10, currentPage : p}">
           <td class="text-center">{{s.id}}</td>
-          <!--          <td></td>-->
           <td class="text-center">{{s.name}}</td>
+<!--          <td class="text-center" *ngFor="let c of credential">{{c.email}}</td>-->
           <td class="text-center">{{s.address}}</td>
           <td class="text-center">{{s.phone}}</td>
           <td class="text-center">{{s.position}}</td>

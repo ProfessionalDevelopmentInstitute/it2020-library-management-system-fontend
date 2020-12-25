@@ -4,6 +4,8 @@ import {LibrarianModel, POSITION, ROLES} from '../../model/librarian.model';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ValidatorService} from '../../service/validator.service';
+import {CredentialService} from '../../service/credential.service';
+import {CredentialModel} from '../../model/credential.model';
 
 @Component({
   selector: 'app-librarian-list',
@@ -20,13 +22,14 @@ export class LibrarianListComponent implements OnInit {
   idToDelete: number;
   idToUpdate: number;
   librarian: LibrarianModel[];
+  credential: CredentialModel[];
   updateLForm: FormGroup;
   p : Number = 1;
   count: Number = 5;
   uMessage: string;
   dMessage: string;
   constructor(private librarianService: LibrarianService, private modalService: NgbModal,
-              private validatorService: ValidatorService) {
+              private validatorService: ValidatorService, private credentialService: CredentialService) {
     this.updateLForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -48,6 +51,12 @@ export class LibrarianListComponent implements OnInit {
     );
   }
   ngOnInit(): void {
+    // this.credentialService.getCredentials().subscribe(
+    //   value => {
+    //     this.credentialService = value.result.content
+    //     console.log(value.result.content);
+    //   }
+    // );
     this.librarianService.getLibrarians().subscribe(
       value => {
         this.librarian= value.result;

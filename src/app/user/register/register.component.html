@@ -59,11 +59,8 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-calendar"></i> </span>
               </div>
-              <input type="text" [matDatepicker]="picker" class="form-control" placeholder="Date of Birth" formControlName="dOfBirth">
-              <div class="input-group-prepend">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-              </div>
+              <input type="date" class="form-control" placeholder="Date of Birth" formControlName="dOfBirth">
+
             </div>
             <div class="text-danger small" *ngIf="registerForm.controls.dOfBirth.invalid">Date of Birth is required</div>
           </div>
