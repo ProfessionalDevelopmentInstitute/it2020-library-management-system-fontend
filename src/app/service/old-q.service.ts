@@ -17,6 +17,14 @@ export class OldQService {
     return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/oqs');
   }
 
+  downloadOQPdf(): Observable<any>{
+    return this.httpClient.get<any>('http://localhost:8081/libMgmtSystem/file/download?path=upload/PROFILE/htetphyozhue/68141610399001567/MyCourseHistory%20(1).pdf');
+  }
+
+  getOQById(id: number): Observable<ResponseModel>{
+    return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/oq/' + id);
+  }
+
   deleteOQ(id: number): Observable<ResponseModel>{
     return this.httpClient.delete<ResponseModel>('http://localhost:8081/libMgmtSystem/oq/' + id);
   }

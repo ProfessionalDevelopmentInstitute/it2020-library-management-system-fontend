@@ -35,6 +35,8 @@ import { LibrarianListComponent } from './user/librarian-list/librarian-list.com
 import {NgxPaginationModule} from 'ngx-pagination';
 import { StuLibraryCardComponent } from './user/stu-library-card/stu-library-card.component';
 import { OqComponent } from './book/oq/oq.component';
+import { OqListsComponent } from './book/oq-lists/oq-lists.component';
+import { ViewPdfComponent } from './book/view-pdf/view-pdf.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: 'login', pathMatch: 'full' },
@@ -50,6 +52,8 @@ const routes: Routes = [
     {path: 'librarian/register', component: LibrarianRegisterComponent},
     {path: 'about', component: AboutComponent},
     {path: 'book/category', component: CategoryComponent},
+    {path: 'pdf/lists', component: OqListsComponent},
+    {path: 'pdf/view', component: ViewPdfComponent},
     {path: 'book/list', component: ListsComponent},
     {path: 'shelf/list', component: ShelfOneComponent},
     {path: 'old/q', component: OqComponent},
@@ -91,6 +95,8 @@ const routes: Routes = [
     LibrarianListComponent,
     StuLibraryCardComponent,
     OqComponent,
+    OqListsComponent,
+    ViewPdfComponent,
   ],
     imports: [
         BrowserModule,

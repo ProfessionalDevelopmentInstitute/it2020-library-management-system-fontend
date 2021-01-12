@@ -25,12 +25,14 @@
             <strong >Book Lists</strong>
           </a>
         </li>
-        <li class="nav-item">
-          <a routerLink="#" class="nav-link">
-            <i class="fa fa-file-pdf nav-icon "></i>
-            <strong >OQ pdf</strong>
-          </a>
-        </li>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a routerLink="/dashboard/pdf/lists" class="nav-link">
+              <i class="fa fa-eye nav-icon text-warning"></i>
+              <p class="small text-warning">OldQ Lists</p>
+            </a>
+          </li>
+        </ul>
         <li class="nav-item has-treeview">
           <hr class="table-bordered">
           <a routerLink="/dashboard/about" class="nav-link ">
@@ -182,6 +184,14 @@
               <a routerLink="/dashboard/shelf/list" class="nav-link">
                 <i class="fa fa-plus-circle nav-icon text-warning"></i>
                 <p class="small text-warning">Shelf Detail Lists</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a routerLink="/dashboard/pdf/lists" class="nav-link">
+                <i class="fa fa-eye nav-icon text-warning"></i>
+                <p class="small text-warning">OldQ Category</p>
               </a>
             </li>
           </ul>
