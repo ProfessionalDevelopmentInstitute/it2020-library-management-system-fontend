@@ -11,5 +11,6 @@ export interface StudentModel {
   password?: string;
   role?: string;
   libraryCard: LibraryCardModel;
+  user?: StudentModel;
 }
 export const ROLE: string[] = ['USER'];

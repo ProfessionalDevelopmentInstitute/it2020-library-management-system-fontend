@@ -34,7 +34,7 @@
         <tr *ngFor="let s of librarian | paginate:{ itemsPerPage: 10, currentPage : p}">
           <td class="text-center">{{s.id}}</td>
           <td class="text-center">{{s.name}}</td>
-<!--          <td class="text-center" *ngFor="let c of credential">{{c.email}}</td>-->
+<!--          <td class="text-center">{{s.user.email}}</td>-->
           <td class="text-center">{{s.address}}</td>
           <td class="text-center">{{s.phone}}</td>
           <td class="text-center">{{s.position}}</td>

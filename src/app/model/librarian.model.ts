@@ -1,3 +1,5 @@
+import {CredentialModel} from './credential.model';
+
 export class LibrarianModel{
   id?: number;
   name: string;
@@ -7,6 +9,7 @@ export class LibrarianModel{
   position: string;
   password: string;
   role: string;
+  user?: LibrarianModel;
 }
 export const ROLES: string[] = ['ADMIN'];
 export const POSITION: string[] = ['Teacher', 'Clerk']

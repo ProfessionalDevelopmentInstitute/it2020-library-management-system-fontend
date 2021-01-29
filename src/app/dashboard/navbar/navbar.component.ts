@@ -9,6 +9,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {ListService} from '../../service/list.service';
 import {BookModel} from '../../model/book.model';
 import {LoginModel} from '../../model/login.model';
+import {ProfileService} from '../../service/profile.service';
 
 @Component({
   selector: 'app-navbar',
@@ -24,9 +25,10 @@ export class NavbarComponent implements OnInit {
 
   authModel: AuthModel;
 
-  constructor(private loginManager: LoginManagerService, private router: Router) {}
+  constructor(private loginManager: LoginManagerService, private router: Router, public proService: ProfileService) {}
 
   ngOnInit(): void {
+    this.proService.onClick();
     this.loginManager.isAuth.subscribe(value => {
       this.authModel = value;
     });
