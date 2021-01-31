@@ -5,10 +5,20 @@
   <div class="container mt-3 sm">
     <div class="card card-body bg-transparent shadow ">
       <div >
-        <form [formGroup]="searchForm" (ngSubmit)="SearchType()" class="float-right">
-          <input type="text" class="small sm" placeholder="Search By Type" formControlName="type">&nbsp;
-          <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
+        <form class="form-inline ml-3 " [formGroup]="searchForm" (ngSubmit)="SearchType()" class="float-right">
+          <div class="input-group input-group-sm" >
+            <input class="form-control form-control-navbar" type="search" placeholder="Search By Type" aria-label="Search" formControlName="type">
+            <div class="input-group-append">
+              <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search text-warning"></i>
+              </button>
+            </div>
+          </div>
         </form>
+<!--        <form [formGroup]="searchForm" (ngSubmit)="SearchType()" class="float-right">-->
+<!--          <input type="text" class="small sm" placeholder="Search By Type" formControlName="type">&nbsp;-->
+<!--          <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>-->
+<!--        </form>-->
       </div>
       <div class="container-fluid mt-3" >
 <!--        <a class="text-warning float-right" href="/dashboard/book/category"><i class="fa fa-backward"></i></a>-->

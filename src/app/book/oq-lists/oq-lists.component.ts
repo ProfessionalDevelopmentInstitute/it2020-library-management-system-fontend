@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {OldQService} from '../../service/old-q.service';
 import {OqModel} from '../../model/oq.model';
 import {ActivatedRoute, Route, Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-oq-lists',
@@ -16,16 +17,29 @@ export class OqListsComponent implements OnInit {
   idToOq: number;
   year: string;
   pdfUrl: string;
-  constructor(private oqService: OldQService, private route: ActivatedRoute, private router: Router) { }
+  searchForm: FormGroup;
+  constructor(private oqService: OldQService, private router: Router) {
+    this.searchForm = new FormGroup({
+      subject: new FormControl('null', Validators.required)
+    });
+  }
 
   ngOnInit(): void {
-
     this.oqService.getOQs().subscribe(
       value => {
         this.lists = value.result;
         console.log(value.result)
       },
 
+    );
+  }
+
+  SearchName(): void{
+    const subject = this.searchForm.value.subject;
+    this.oqService.searchSubjectName(subject).subscribe(
+      value => {
+        this.lists = value.result;
+      }
     );
   }
 

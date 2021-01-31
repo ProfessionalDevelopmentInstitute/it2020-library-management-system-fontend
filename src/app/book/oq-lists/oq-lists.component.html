@@ -17,6 +17,18 @@
 <!--      {{pdfUrl}}-->
 <!--    </div>-->
 <!--  </div>-->
+  <div class="mb-5">
+    <form class="form-inline ml-3 " [formGroup]="searchForm" (ngSubmit)="SearchName()" class="float-right">
+      <div class="input-group input-group-sm" >
+        <input class="form-control form-control-navbar" type="search" placeholder="Search By Subject Name" aria-label="Search" formControlName="subject">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search text-warning"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
   <div class="container mt-3 sm">
     <div class="row">
       <div class="card card-body shadow-lg bg-gray-light" *ngFor="let l of lists | paginate:{itemsPerPage: 30, currentPage : p}">

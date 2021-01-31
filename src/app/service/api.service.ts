@@ -15,10 +15,10 @@ export class ApiService {
   }
 
   public getStaffMessage(): Observable<any>{
-    return this.httpClient.get('http://localhost:8081/libMgmtSystem/user', {responseType : 'text'});
+    return this.httpClient.get('http://localhost:8081/libMgmtSystem/student', {responseType : 'text'});
   }
 
   public masterMessage(): Observable<any>{
-    return this.httpClient.get('http://localhost:8081/libMgmtSystem/admin', {responseType : 'text'});
+    return this.httpClient.get('http://localhost:8081/libMgmtSystem/librarian', {responseType : 'text'});
   }
 }

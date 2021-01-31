@@ -44,6 +44,14 @@ export class ShelfOneComponent implements OnInit {
       }
     );
   }
+  SearchRoom(): void{
+    const room = this.updateForm.value.room;
+    this.shelfService.searchRoomName(room).subscribe(
+      value => {
+        this.result = value.result;
+      }
+    );
+  }
   onSubmit(): void{
     const add: Shelf = {
       id: this.addForm.value.id,

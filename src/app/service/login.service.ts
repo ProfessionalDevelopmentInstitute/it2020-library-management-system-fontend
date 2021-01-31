@@ -27,6 +27,7 @@ export class LoginService {
     const httpHeader: HttpHeaders = new HttpHeaders({
       Authorization: encrypt
     });
+
     return this.httpClient.post<any>(
       'http://localhost:8081/libMgmtSystem/' + type + '/login',
       null,

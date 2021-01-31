@@ -12,6 +12,10 @@ export class ShelfService {
 
   constructor(private httpClient: HttpClient) { }
 
+  searchRoomName(room: string): Observable<ResponseModel> {
+    return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/search/shelf?room=' + room);
+  }
+
   getShelves(): Observable<ResponseModel>{
     return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/shelves');
   }

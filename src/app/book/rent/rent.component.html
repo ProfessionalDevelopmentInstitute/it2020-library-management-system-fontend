@@ -12,10 +12,17 @@
   <div class="card card-body">
     <div >
       <a class="text-warning" routerLink="/add/new/rent"><i class="fa fa-plus-circle"></i> Add New Rent</a>
-      <form [formGroup]="addRForm" (ngSubmit)="SearchByName()" class="float-right">
-        <input type="text" class="small sm" placeholder="Search By Student Name" formControlName="student">&nbsp;
-        <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
-      </form>
+        <form class="form-inline ml-3 " [formGroup]="addRForm" (ngSubmit)="SearchByName()" class="float-right">
+          <div class="input-group input-group-sm" >
+            <input class="form-control form-control-navbar" type="search" placeholder="Search By Student Name" aria-label="Search" formControlName="student">
+            <div class="input-group-append">
+              <button class="btn btn-navbar" type="submit">
+                <i class="fas fa-search text-warning"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+
     </div>
     <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
       <table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">

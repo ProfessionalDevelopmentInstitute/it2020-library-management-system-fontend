@@ -36,4 +36,8 @@ export class OldQService {
   updateOQ(u: OqModel[]): Observable<ResponseModel> {
     return this.httpClient.put<ResponseModel>('http://localhost:8081/libMgmtSystem/update/oq/', u);
   }
+
+  searchSubjectName(subject: string): Observable<ResponseModel> {
+    return this.httpClient.get<ResponseModel>('http://localhost:8081/libMgmtSystem/search/oq/name?subject=' + subject);
+  }
 }

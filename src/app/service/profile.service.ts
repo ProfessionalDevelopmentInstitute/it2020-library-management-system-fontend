@@ -21,6 +21,7 @@ export class ProfileService {
   dateOfBirth: Date;
   position: string;
   rollNumber: string;
+  id: number;
   constructor(private loginManger: LoginManagerService, private router: Router) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -39,6 +40,7 @@ export class ProfileService {
     if(this.loginForm.value.type === 'student'){
       this.loginManger.studentSignIn(login).subscribe(
         value => {
+          this.id = value.id;
           this.email= value.email;
           this.address = value.user.address;
           this.name = value.user.name;
@@ -53,12 +55,13 @@ export class ProfileService {
     if(this.loginForm.value.type === 'librarian'){
       this.loginManger.librarianSignIn(login).subscribe(
         value => {
+          this.id = value.id;
           this.email = value.email;
           this.address = value.user.address;
           this.name = value.user.name;
           this.phone = value.user.phone;
           this.position = value.user.position;
-          console.log(value.user.address, value.user.name)
+          console.log(value.user.id, value.user.name)
           this.router.navigate(['dashboard/home']);
         }
       );

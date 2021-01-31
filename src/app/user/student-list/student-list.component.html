@@ -12,11 +12,21 @@
 <body>
 <div class="container-fluid mt-2">
   <div class="card card-body">
-    <div>
-      <form [formGroup]="inputForm" (ngSubmit)="clicker()">
-        <input type="text" class="small sm" placeholder="Search By Name" formControlName="name">&nbsp;
-        <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
+    <div >
+      <form class="form-inline ml-3 " [formGroup]="inputForm" (ngSubmit)="clicker()" class="float-right">
+        <div class="input-group input-group-sm" >
+          <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" formControlName="name">
+          <div class="input-group-append">
+            <button class="btn btn-navbar" type="submit">
+              <i class="fas fa-search text-warning"></i>
+            </button>
+          </div>
+        </div>
       </form>
+<!--      <form [formGroup]="inputForm" (ngSubmit)="clicker()">-->
+<!--        <input type="text" class="small sm" placeholder="Search By Name" formControlName="name">&nbsp;-->
+<!--        <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>-->
+<!--      </form>-->
     </div>
     <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
       <table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">

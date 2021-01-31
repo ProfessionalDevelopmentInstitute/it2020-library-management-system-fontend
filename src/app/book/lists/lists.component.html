@@ -13,10 +13,17 @@
   <div class="card card-body">
     <div>
       <a class="text-warning" routerLink="/dashboard/add/new/items"><i class="fa fa-plus-circle"></i> Add New Book</a>
-      <form [formGroup]="searchForm" (ngSubmit)="search()" class="float-right">
-        <input type="text" class="small sm" placeholder="Search By Book Name" formControlName="name">
-        <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
+      <form class="form-inline ml-3 " [formGroup]="searchForm" (ngSubmit)="search()" class="float-right">
+        <div class="input-group input-group-sm" >
+          <input class="form-control form-control-navbar" type="search" placeholder="Search By Book Name" aria-label="Search" formControlName="name">
+          <div class="input-group-append">
+            <button class="btn btn-navbar" type="submit">
+              <i class="fas fa-search text-warning"></i>
+            </button>
+          </div>
+        </div>
       </form>
+
     </div>
     <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
       <table  class="display table table-striped table-bordered table-hover" style="width:100%">

@@ -48,6 +48,15 @@ export class OqComponent implements OnInit {
       }
     );
   }
+
+  SearchSub(): void{
+    const subject = this.updateForm.value.subject;
+    this.oldService.searchSubjectName(subject).subscribe(
+      value => {
+        this.result = value.result;
+      }
+    );
+  }
   onSubmit(): void{
     const add: OqModel = {
       subject: this.addForm.value.subject,

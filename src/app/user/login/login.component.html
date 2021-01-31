@@ -28,6 +28,7 @@
             <input type="radio" value="student" name="type" formControlName="type">Student
           &nbsp;
             <input type="radio" value="librarian" name="type" formControlName="type">Librarian
+            <div class="text-danger small" *ngIf="pService.loginForm.controls.type.invalid">Choose One</div>
           </div>
           <div class="form-group text-center">
             <button [disabled]="pService.loginForm.invalid" type="submit" class="btn btn btn-outline-secondary form-control">Login</button>

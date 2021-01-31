@@ -53,11 +53,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text text-indigo"><i class="fa fa-calendar"></i> </span>
                     </div>
-                  <input type="text" class="form-control" [matDatepicker]="picker1" formControlName="rentFromDate" placeholder="Rent Date">
-                    <div class="input-group-prepend">
-                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                      <mat-datepicker #picker1></mat-datepicker>
-                    </div>
+                  <input type="date" class="form-control"  formControlName="rentFromDate" placeholder="Rent Date">
                   </div>
                   <div class="text-danger small" *ngIf="addRentForm.controls.rentFromDate.invalid">Author Name is required</div>
                 </div>
@@ -68,11 +64,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text text-indigo"><i class="fa fa-calendar"></i> </span>
                     </div>
-                    <input type="text" [matDatepicker]="picker2" class="form-control" placeholder="Due Date" formControlName="rentToDate">
-                    <div class="input-group-prepend">
-                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                      <mat-datepicker #picker2></mat-datepicker>
-                    </div>
+                    <input type="date" class="form-control" placeholder="Due Date" formControlName="rentToDate">
                   </div>
                   <div class="text-danger small" *ngIf="addRentForm.controls.rentToDate.invalid">Date of Birth is required</div>
                 </div>
@@ -81,11 +73,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text text-indigo"><i class="fa fa-calendar"></i> </span>
                     </div>
-                    <input type="text" [matDatepicker]="picker" class="form-control" placeholder="Return Date" formControlName="returnDate">
-                    <div class="input-group-prepend">
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
-                    </div>
+                    <input type="date" class="form-control" placeholder="Return Date" formControlName="returnDate">
                   </div>
                   <div class="text-danger small" *ngIf="addRentForm.controls.returnDate.invalid">Return Date is required</div>
                 </div>

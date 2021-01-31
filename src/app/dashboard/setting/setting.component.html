@@ -58,25 +58,8 @@
               <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"><i class="fa fa-cog"></i> Setting</h6>
               <div class="row">
                 <div class="col-sm-12">
-                  <p class="m-b-10 f-w-600">Change Password</p>
+                  <a (click)="open(content)" class="m-b-10 f-w-600 d-block small">Change Password</a>
 <!--                  <h6 class="text-muted f-w-400">Sam Disuja</h6>-->
-                  <form>
-                    <div class="form-group">
-                      <label class="small"><i class="fa fa-lock-open text-indigo"></i> Current Password</label>
-                      <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <label class="small"><i class="fa fa-lock text-indigo"></i> New Password</label>
-                      <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <label class="small"><i class="fa fa-lock text-indigo"></i> New Retype Password</label>
-                      <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-outline-secondary small form-control">Change</button>
-                    </div>
-                  </form>
                 </div>
               </div>
             </div>
@@ -87,33 +70,39 @@
   </div>
 </div>
 </div>
-<!--<div class="container">-->
-<!--    <div class="row mt-3">-->
-<!--      <div class="col-lg-4 offset-lg-4 mt-3">-->
-<!--        <div class="card">-->
-<!--          <div class="card-header"><i class="fa fa-cogs "></i>&nbsp;<strong>Setting</strong> </div>-->
-<!--          <div class="card-body">-->
-<!--            <form>-->
-<!--              <div class="form-group">-->
-<!--                <label class="small"><i class="fa fa-lock-open text-indigo"></i> Current Password</label>-->
-<!--                <input type="text" class="form-control">-->
-<!--              </div>-->
-<!--              <div class="form-group">-->
-<!--                <label class="small"><i class="fa fa-lock text-indigo"></i> New Password</label>-->
-<!--                <input type="text" class="form-control">-->
-<!--              </div>-->
-<!--              <div class="form-group">-->
-<!--                <label class="small"><i class="fa fa-lock text-indigo"></i> New Retype Password</label>-->
-<!--                <input type="text" class="form-control">-->
-<!--              </div>-->
-<!--              <div class="form-group">-->
-<!--                <button type="submit" class="btn btn-outline-info small form-control">Change</button>-->
-<!--              </div>-->
-<!--            </form>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--</div>-->
+<!--  detail model-->
+<ng-template #content let-modal class="shadow">
+  <div class="alert alert-default-primary" *ngIf="uMessage" [ngClass]="uMessage" >
+    Change Password <strong>{{uMessage}}</strong>
+    <button type="button" class="close text-danger btn btn-lg" data-dismiss="alert">&times;</button>
+  </div>
+  <div class="modal-header ">
+    <span class="text-indigo"><h5 class="modal-title" id="modal-basic-title">Profile Setting</h5></span>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="UpdatePassword()" [formGroup]="updatePassword">
+      <div class="form-group">
+        <label class="small"><i class="fa fa-lock-open text-indigo"></i> Current Password</label>
+        <input type="text" class="form-control" formControlName="old_password">
+      </div>
+      <div formGroupName="passwords">
+        <div class="form-group">
+          <label class="small"><i class="fa fa-lock text-indigo"></i> New Password</label>
+          <input type="text" class="form-control" formControlName="password">
+        </div>
+        <div class="form-group">
+          <label class="small"><i class="fa fa-lock text-indigo"></i> New Retype Password</label>
+          <input type="text" class="form-control" formControlName="confirmPassword">
+        </div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="updatePassword.invalid" type="submit" class="btn btn-outline-secondary small form-control">Change</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
 </body>
 </html>

@@ -55,10 +55,17 @@
       <div class="col-lg-8">
         <div class="card card-body">
           <div >
-            <form [formGroup]="addLForm" (ngSubmit)="SearchByRollNo()" class="float-right">
-              <input type="text" class="small sm" placeholder="Search By RollNo" formControlName="rollNo">&nbsp;
-              <button class="text-dark btn btn-sm" type="submit"><i class="fa fa-search"></i></button>
+            <form class="form-inline ml-3 " [formGroup]="addLForm" (ngSubmit)="SearchByRollNo()" class="float-right">
+              <div class="input-group input-group-sm" >
+                <input class="form-control form-control-navbar" type="search" placeholder="Search By RollNo" aria-label="Search" formControlName="rollNo">
+                <div class="input-group-append">
+                  <button class="btn btn-navbar" type="submit">
+                    <i class="fas fa-search text-warning"></i>
+                  </button>
+                </div>
+              </div>
             </form>
+
           </div>
           <div class="row col-lg-12 col-sm-12 col-md-12 mt-3">
             <table class="display table table-striped table-bordered table-hover" style="width:100%">

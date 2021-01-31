@@ -20,7 +20,7 @@
         <a class="nav-link text-warning" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars fa-lg"></i></a>
       </li>
       <li *ngIf="authModel.isAuthenticated && authModel.isLib" class="nav-item d-none d-sm-inline-block">
-        <a routerLink="/dashboard/home" class="nav-link text-warning" >Home</a>
+<!--        <a routerLink="/dashboard/home" class="nav-link text-warning" >Home</a>-->
       </li>
 <!--      <li class="nav-item d-none d-sm-inline-block">-->
 <!--        <a href="#" class="nav-link text-warning">Contact</a>-->
@@ -28,16 +28,16 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3 ">
-      <div class="input-group input-group-sm" *ngIf="authModel.isAuthenticated && authModel.isLib">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search text-warning"></i>
-          </button>
-        </div>
-      </div>
-    </form>
+<!--    <form class="form-inline ml-3 ">-->
+<!--      <div class="input-group input-group-sm" *ngIf="authModel.isAuthenticated && authModel.isLib">-->
+<!--        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">-->
+<!--        <div class="input-group-append">-->
+<!--          <button class="btn btn-navbar" type="submit">-->
+<!--            <i class="fas fa-search text-warning"></i>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </form>-->
 <!--    <a class="navbar-nav ml-auto mr-5 shadow sm small" *ngIf="!isAuthenticated">-->
 <!--      <ul>-->
 <!--        &lt;!&ndash; Messages Dropdown Menu &ndash;&gt;-->
